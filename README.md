@@ -1,7 +1,9 @@
 Verwaltungstool für Stadtspiele
 ===============================
 
-Organizing a special kind of city-treasure-hunt for school-classes and other youth groups. It's particulary for the organisation of this treasure-hunt: <a href="http://www.tipsntrips.de/stadtspiel">http://www.tipsntrips.de/</a> to test it.
+A tool to organize visits of school-classes and other youth groups in a institution, f.e. Youth-informations-center, library a.s.o.
+For Example it ois for managing special kind of city-treasure-hunt for school-classes and other youth groups. 
+It's particulary for the organisation of this treasure-hunt: <a href="http://www.tipsntrips.de/stadtspiel">http://www.tipsntrips.de/</a> to test it.
 
 
 ::TODO::
