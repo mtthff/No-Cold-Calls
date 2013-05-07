@@ -2,7 +2,7 @@
 
 require_once 'DBconnection.php';
 
-mysql_query("CREATE TABLE IF NOT EXISTS news ( 
+mysql_query(" 
        
         CREATE TABLE IF NOT EXISTS customer (
             id INT(255) NOT NULL auto_increment,
