@@ -1,6 +1,5 @@
-Uncold Call / No cold call
+No cold calls
 ==========================
-uncold calls / No cold calls
 
 Verwaltungstool Besuche von Schulklassen und Jugendgruppen
 

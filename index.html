@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -55,10 +56,11 @@
       <div class="row">
         <div class="span12">
           <h2>Übersicht <a href="#" class="btn btn disabled">Neuen Termin eingeben</a></h2>
-          <table class="table table-striped table-bordered">
+          <table class="table table-hover table-condensed tablesorter" id="sortTable">
+
             <thead>
                 <tr>
-                    <th>Termin<i class="icon-chevron-down"></i></th>
+                    <th>Termin</th>
                     <th>Beginn</th>
                     <th>Einrichtung/Schule</th>
                     <th>Leiter</th>
@@ -96,12 +98,12 @@
                     <td><i class="icon-trash"></i></td>                    
                 </tr>
                 <tr class="info">
-                    <td>25.07.13</td>
+                    <td>26.07.13</td>
                     <td>10:15</td>
                     <td>Waldschule Degerloch</td>
-                    <td>Fr.Müller</td>
+                    <td>Fr.nüller</td>
                     <td>0172-11111111</td>
-                    <td>7. Klasse</td>
+                    <td>8. Klasse</td>
                     <td>23</td>
                     <td>Premium Ö</td>
                     <td></td>
@@ -114,12 +116,12 @@
                     <td><i class="icon-trash"></i></td>                    
                 </tr>
                 <tr>
-                    <td>24.07.13</td>
+                    <td>24.08.13</td>
                     <td>10:15</td>
                     <td>Waldschule Degerloch</td>
-                    <td>Fr.Müller</td>
+                    <td>Fr.püller</td>
                     <td>0172-11111111</td>
-                    <td>7. Klasse</td>
+                    <td>9. Klasse</td>
                     <td>23</td>
                     <td>Premium Ö</td>
                     <td></td>
@@ -132,7 +134,7 @@
                     <td><i class="icon-trash"></i></td>                    
                 </tr>                
             </tbody>
-          </table>        
+          </table>    
         </div>
       </div>
 
@@ -148,7 +150,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-2.0.0.min.js"></script>
+    <script src="js/jquery.tablesorter.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/index.js"></script>
 
   </body>
 </html>
