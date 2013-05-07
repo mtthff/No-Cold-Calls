@@ -37,11 +37,11 @@
           <a class="brand" href="#">No Cold Call</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li><a href="index.html">Übersicht</a></li>
+              <li><a href="index.php">Übersicht</a></li>
               <li><a href="#">Kundenverwaltung</a></li>
               <li><a href="#">Admin</a></li>
               <li><a href="#">Backup</a></li>
-              <li class="active"><a href="about.html">About</a></li>		  
+              <li class="active"><a href="about.php">About</a></li>		  
             </ul>
           </div><!--/.nav-collapse -->
         </div>

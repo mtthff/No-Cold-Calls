@@ -2,13 +2,6 @@
 
 require_once 'DBconnection.php';
 
-$connection = mysql_connect($host , $user , $pass) 
-    OR die ("Keine Verbindung zu der Datenbank moeglich.");
-$db = mysql_select_db($dbase , $connection) 
-    OR die ("Auswahl der Datenbank nicht moeglich."); 
-
-//---------------------------------------------------
-
 mysql_query("CREATE TABLE IF NOT EXISTS news ( 
        
         CREATE TABLE IF NOT EXISTS customer (

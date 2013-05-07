@@ -2,12 +2,6 @@
 
 require_once 'DBconnection.php';
 
-$connection = mysql_connect($host ,  $user , $pass) 
-    OR die ("Keine Verbindung zu der Datenbank moeglich.");
-$db = mysql_select_db($dbase ,  $connection) 
-    OR die ("Auswahl der Datenbank nicht moeglich."); 
-//---------------------------------------------------
-
 mysql_query("
     INSERT INTO customer (id, organisation, street, postcode, city, phone, mobil, email) VALUES ('', 'Jugendhaus', 'Filderbahnplatz', '70619', 'Stuttgart', '0711/123456', '0170/02010000', 'bla@tipsntrips.de);
     INSERT INTO customer (id, organisation, street, postcode, city, phone, mobil, email) VALUES ('', 'Kinderhaus', 'Langestr', '70378', 'Stuttgart', '0711/654321', '0170/2233222', 'kh@web.de);

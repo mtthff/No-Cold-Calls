@@ -5,7 +5,7 @@
     <title>No Cold Call</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Matthias Hoffmann">
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -39,11 +39,11 @@
           <a class="brand" href="index.html">No Cold Call</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="index.html">Übersicht</a></li>
+              <li class="active"><a href="index.php">Übersicht</a></li>
               <li><a href="#">Kundenverwaltung</a></li>
               <li><a href="#">Admin</a></li>
               <li><a href="#">Backup</a></li>
-              <li><a href="about.html">About</a></li>			  
+              <li><a href="about.php">About</a></li>			  
             </ul>
           </div><!--/.nav-collapse -->
         </div>
