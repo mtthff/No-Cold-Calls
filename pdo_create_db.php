@@ -25,7 +25,8 @@ try{
             email VARCHAR(255) NULL DEFAULT NULL,
           PRIMARY KEY (id)
         );
-    ");    
+    ");
+    echo "Table <i>customer</i> created. <br />";
 	
    //Table APPOINTMENT
     $db->exec("
@@ -45,6 +46,7 @@ try{
           PRIMARY KEY (id)
         );        
     ");
+    echo "Table <i>appointment</i> created. <br />";
     
    //Table SPECIALIZED
     $db->exec("
@@ -55,6 +57,7 @@ try{
           PRIMARY KEY (id)
         );
     ");
+    echo "Table <i>specialized</i> created. <br />";
     
    //Table TYPE
     $db->exec("
@@ -64,6 +67,7 @@ try{
           PRIMARY KEY (id)
         );
     ");
+    echo "Table <i>type</i> created. <br />";    
     
    //Table CONTRIBUTOR
     $db->exec("
@@ -73,9 +77,14 @@ try{
           PRIMARY KEY (id)
         );
     ");
+    echo "Table <i>contributor</i> created. <br />";    
     
     //close the database connection
     $db = NULL;
+    
+    echo "<br />Creation of database and tables finished.<br />";
+    echo "Want to fill the tables with some default content?&nbsp;";
+    echo "<a href='pdo_fill_db.php'>yes</a>&nbsp;<a href='index.php'>no</a>";
     
 }catch(PDOException $e){
     print 'Exception : '.$e->getMessage();
