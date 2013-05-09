@@ -7,8 +7,7 @@ try {
 		CREATE TABLE IF NOT EXISTS user (
 			id INTEGER PRIMARY KEY,
 			name VARCHAR(255),
-			klasse VARCHAR(255)		  
-		);
+			klasse VARCHAR(255));
 	");
   
   //Platzhalter mit Daten versehen und 
