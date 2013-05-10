@@ -32,3 +32,11 @@ table .headerSortUp:after {
 th{
     font-size: .7em;
 }
+
+i.icon-pencil{
+    cursor: pointer;
+}
+
+i.icon-trash{
+    cursor: pointer;
+}

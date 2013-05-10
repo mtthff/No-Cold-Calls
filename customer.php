@@ -106,7 +106,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
     foreach ($app as $value) {
         $spec = unserialize($value['specialized_value']);
-        echo '<tr>';
+        echo '<tr id="'.$value['id'].'">';
         echo '<td>'.$value['organisation'].'</td>';
         echo '<td>'.$value['street'].'</td>';
         echo '<td>'.$value['postcode'].'</td>';
@@ -140,7 +140,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
     <script src="js/jquery-2.0.0.min.js"></script>
     <script src="js/jquery.tablesorter.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/customer.js"></script>
 
   </body>
 </html>
