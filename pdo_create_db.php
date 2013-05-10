@@ -42,6 +42,7 @@ try{
             mobil VARCHAR(255),
             email VARCHAR(255),
             number INT(24) NULL,
+            comment TEXT,
             contributor_id INT(255),
             listed_date DATE,
             type_id INT(255),

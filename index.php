@@ -9,6 +9,8 @@ try{
                                 a.contact,
                                 a.phone,
                                 a.mobil,
+                                a.number,
+                                a.comment,
                                 a.specialized_value,
                                 co.name,
                                 strftime("%d.%m.%Y", a.listed_date) AS listed_date
@@ -21,6 +23,11 @@ try{
     while($row = $STH->fetch()){
         $app[]= $row;
     }
+//    echo "<pre>";
+//    print_r($app);
+//    exit;
+    
+    
 }
 catch(PDOException $e) //Besonderheiten anzeigen
 {
@@ -127,24 +134,25 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
      */
     foreach ($app as $value) {
+        $spec = unserialize($value['specialized_value']);
         echo '<tr>';
         echo '<td>'.$value['day'].'</td>';
         echo '<td>'.$value['time'].'</td>';
         echo '<td>'.$value['organisation'].'</td>';
         echo '<td>'.$value['contact'].'</td>';
         echo '<td>'.$value['phone'].'</td>';
-        echo '<td>'.$value[''].'</td>';
-        echo '<td>'.$value[''].'</td>';
-        echo '<td>'.$value[''].'</td>';
-        echo '<td>'.$value[''].'</td>';
-        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$spec['Klassenstufe'].'</td>';
+        echo '<td>'.$value['number'].'</td>';
+        echo '<td>'.$spec['Tarif'].'</td>';
+        echo '<td>'.$spec['JuHe'].'</td>';
+        echo '<td>'.$spec['Version'].'</td>';
         echo '<td><i class="icon-ok"></td>';
-        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value['comment'].'</td>';
         echo '<td>'.$value['name'].'</td>';
         echo '<td>'.$value['listed_date'].'</td>';
         echo '<td><i class="icon-pencil"></i></td>';
         echo '<td><i class="icon-trash"></i></td>';                    
-        echo '</tr>\n';
+        echo '</tr>';
 }
 ?>
         

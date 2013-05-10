@@ -17,13 +17,14 @@ try{
     $DBH->exec("INSERT INTO customer (organisation, street, postcode, city, phone, mobil, email) 
                                VALUES ('Kinderhaus', 'Langestr', '70378', 'Stuttgart', '0711/654321', '0170/2233222', 'kh@web.de');");
     
+    $spec = array('Klassenstufe' => '10b','Tarif' => 'Klassik Oe','JuHe' => 'j','Version' => 'englisch','Foto-CD' => 'j');
     $DBH->exec("DELETE FROM appointment");
-    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, contributor_id, listed_date, type_id, specialized_value) 
-                               VALUES ('1', '2013-07-12 10:15:00', 'Fr. Mueller', '', '', '', '31', '1', '2013-05-07', '1', '');");
-    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, contributor_id, listed_date, type_id, specialized_value) 
-                               VALUES ('2', '2013-07-17 15:00:00', 'Fr. Maier', '', '', '', '23', '2', '2013-04-07', '1', '');");
-    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, contributor_id, listed_date, type_id, specialized_value) 
-                               VALUES ('1', '2013-08-17 10:15:00', 'Fr. Schmitt', '', '', '', '13', '1', '2013-03-07', '1', '');");
+    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
+                               VALUES ('1', '2013-07-12 10:15:00', 'Fr. Müller', '', '', '', '31', '-', '1', '2013-05-07', '1', '".serialize($spec)."');");
+    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
+                               VALUES ('2', '2013-07-17 15:00:00', 'Fr. Maier',  '', '', '', '23', '-', '2', '2013-04-07', '1', '".serialize($spec)."');");
+    $DBH->exec("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
+                               VALUES ('1', '2013-08-17 10:15:00', 'Fr. Schmitt','', '', '', '13', '-', '1', '2013-03-07', '1', '".serialize($spec)."');");
 
     $DBH->exec("DELETE FROM specialized");
     $DBH->exec("INSERT INTO specialized (name, type_id) VALUES ('Alter', '1');
