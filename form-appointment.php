@@ -96,9 +96,12 @@
 
         <!-- Example row of columns -->
       <div class="row">
-        <div class="span12">
+          <div class="span12">
             <h3>Neuer Termin</h3>
-            <form class="form-horizontal">
+          </div>
+          <form class="form-horizontal">
+          <div class="span6">
+
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
@@ -112,13 +115,77 @@
                 </div>
               </div>
               <div class="control-group">
+                <label class="control-label" for="inputOrganisation">Einrichtung/Schule</label>
                 <div class="controls">
-                  <label class="checkbox">
-                    <input type="checkbox"> Remember me
-                  </label>
-                  <button type="submit" class="btn">Sign in</button>
+                  <input type="text" id="inputOrganisation" placeholder="Organisation">
                 </div>
               </div>
+              <div class="control-group">
+                <label class="control-label" for="inputCustomer">Leiter</label>
+                <div class="controls">
+                  <input type="text" id="inputCustomer" placeholder="Leiter">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputPhone">Telefon</label>
+                <div class="controls">
+                  <input type="text" id="inputPhone" placeholder="Telefon">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputMobil">Mobil</label>
+                <div class="controls">
+                  <input type="text" id="inputMobil" placeholder="Mobil">
+                </div>
+              </div>
+        </div>
+        <div class="span6">
+              <div class="control-group">
+                <label class="control-label" for="inputClass">Klass/Alter</label>
+                <div class="controls">
+                  <input type="text" id="inputClass" placeholder="Klasse/Alter">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputNumber">Teilnehmerzahl</label>
+                <div class="controls">
+                  <input type="text" id="inputNumber" placeholder="Teilnehmerzahl">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputTarif">Tarif</label>
+                <div class="controls">
+                  <input type="text" id="inputTarif" placeholder="Tarif">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputJuHe">Jugenherberge</label>
+                <div class="controls">
+                  <input type="text" id="inputJuHe" placeholder="Jugendherberge">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputVersion">Version</label>
+                <div class="controls">
+                  <input type="text" id="inputVersion" placeholder="Version">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputFotoCD">Foto-CD</label>
+                <div class="controls">
+                  <input type="text" id="inputFotoCD" placeholder="Foto-CD">
+                </div>
+              </div>
+        </div>
+          <div class="span12">
+              <div class="control-group">
+                <label class="control-label" for="inputComment">Bemerkung</label>
+                <div class="controls">
+                  <input type="text" id="inputComment" placeholder="Bemerkung">
+                </div>
+              </div>
+            
+        </div>
             </form>
             
         </div>
