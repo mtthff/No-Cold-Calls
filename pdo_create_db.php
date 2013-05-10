@@ -27,7 +27,10 @@ try{
             city VARCHAR(255),
             phone VARCHAR(255),
             mobil VARCHAR(255),
-            email VARCHAR(255));
+            email VARCHAR(255),
+            listed_since DATE,
+            contributor_id INTEGER
+            );
     ");
     echo "Table <i>customer</i> created. <br />";
 	
@@ -35,7 +38,7 @@ try{
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS appointment (
             id INTEGER PRIMARY KEY,
-            customer_id INT(255),
+            customer_id INTEGER,
             datetime DATETIME,
             contact VARCHAR(255),
             phone VARCHAR(255),
@@ -43,7 +46,7 @@ try{
             email VARCHAR(255),
             number INT(24) NULL,
             comment TEXT,
-            contributor_id INT(255),
+            contributor_id INTEGER,
             listed_date DATE,
             type_id INT(255),
             specialized_value TEXT);        
@@ -55,7 +58,8 @@ try{
         CREATE TABLE IF NOT EXISTS specialized (
           id INTEGER PRIMARY KEY,
           name VARCHAR(255),
-          type_id INT(255));
+          type_id INTEGER,
+          status BOOLEAN);
     ");
     echo "Table <i>specialized</i> created. <br />";
     
