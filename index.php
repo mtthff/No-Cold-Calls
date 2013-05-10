@@ -1,23 +1,32 @@
 <?php
+try{
     $DBH = new PDO("sqlite:nocoldcalls.sqlite");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $result = $DBH->query('SELECT strftime("%d.%m.%y", a.datetime) as day,
-                                strftime("%H:%M", a.datetime) as time,
+    $STH = $DBH->query('SELECT strftime("%d.%m.%Y", a.datetime) AS day,
+                                strftime("%H:%M", a.datetime) AS time,
                                 cu.organisation,
                                 a.contact,
                                 a.phone,
                                 a.mobil,
                                 a.specialized_value,
                                 co.name,
-                                strftime("%d.%m.%y",a.listed_date) as listed_date
-                            FROM appointment a
-                            LEFT JOIN customer cu ON (a.customer_id = cu.id)
-                            LEFT JOIN contributor co ON (a.contributor_id = co.id)
+                                strftime("%d.%m.%Y", a.listed_date) AS listed_date
+                            FROM appointment AS a
+                            LEFT JOIN customer AS cu ON (a.customer_id = cu.id)
+                            LEFT JOIN contributor  AS co ON (a.contributor_id = co.id)
                         ');
-    echo "<pre>";
-    print_r($result);
-    exit;
+
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $app[]= $row;
+    }
+}
+catch(PDOException $e) //Besonderheiten anzeigen
+{
+	print 'Exception : '.$e->getMessage();
+}
+
 ?>
 
 
@@ -102,42 +111,43 @@
                 </tr>
             </thead>
             <tbody style="font-size:.9em">
-                <tr>
-                    <td>24.07.13</td>
-                    <td>10:15</td>
-                    <td>Waldschule Degerloch</td>
-                    <td>Fr.Müller</td>
-                    <td>0172-11111111</td>
-                    <td>7. Klasse</td>
-                    <td>23</td>
-                    <td>Premium Ö</td>
-                    <td></td>
-                    <td>dt.</td>
-                    <td><i class="icon-ok"></td>
-                    <td>-</td>
-                    <td>mh</td>
-                    <td>18.05.13</td>
-                    <td><i class="icon-pencil"></i></td>
-                    <td><i class="icon-trash"></i></td>                    
-                </tr>
-                <tr class="info">
-                    <td>26.07.13</td>
-                    <td>10:15</td>
-                    <td>Waldschule Degerloch</td>
-                    <td>Fr.nüller</td>
-                    <td>0172-11111111</td>
-                    <td>8. Klasse</td>
-                    <td>23</td>
-                    <td>Premium Ö</td>
-                    <td></td>
-                    <td>dt.</td>
-                    <td><i class="icon-ok"></td>
-                    <td>-</td>
-                    <td>mh</td>
-                    <td>18.05.13</td>
-                    <td><i class="icon-pencil"></i></td>
-                    <td><i class="icon-trash"></i></td>                    
-                </tr>
+<?php
+    /*
+     * Array
+(
+    [day] => 
+    [time] => 00:10
+    [organisation] => Jugendhaus
+    [contact] => Fr. Mueller
+    [phone] => 
+    [mobil] => 
+    [specialized_value] => 
+    [name] => Matthias
+    [listed_date] => 
+
+     */
+    foreach ($app as $value) {
+        echo '<tr>';
+        echo '<td>'.$value['day'].'</td>';
+        echo '<td>'.$value['time'].'</td>';
+        echo '<td>'.$value['organisation'].'</td>';
+        echo '<td>'.$value['contact'].'</td>';
+        echo '<td>'.$value['phone'].'</td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td><i class="icon-ok"></td>';
+        echo '<td>'.$value[''].'</td>';
+        echo '<td>'.$value['name'].'</td>';
+        echo '<td>'.$value['listed_date'].'</td>';
+        echo '<td><i class="icon-pencil"></i></td>';
+        echo '<td><i class="icon-trash"></i></td>';                    
+        echo '</tr>\n';
+}
+?>
+        
                 <tr>
                     <td>24.08.13</td>
                     <td>10:15</td>
