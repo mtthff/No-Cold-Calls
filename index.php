@@ -1,3 +1,26 @@
+<?php
+    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
+
+    $result = $DBH->query('SELECT strftime("%d.%m.%y", a.datetime) as day,
+                                strftime("%H:%M", a.datetime) as time,
+                                cu.organisation,
+                                a.contact,
+                                a.phone,
+                                a.mobil,
+                                a.specialized_value,
+                                co.name,
+                                strftime("%d.%m.%y",a.listed_date) as listed_date
+                            FROM appointment a
+                            LEFT JOIN customer cu ON (a.customer_id = cu.id)
+                            LEFT JOIN contributor co ON (a.contributor_id = co.id)
+                        ');
+    echo "<pre>";
+    print_r($result);
+    exit;
+?>
+
+
 <!DOCTYPE html>
 <html lang="de">
   <head>
