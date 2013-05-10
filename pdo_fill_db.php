@@ -6,11 +6,12 @@ try{
 
 // open the database - if database exists, then opens the existing one, else opens a new one.
 	
-    $db = new PDO("sqlite:$db_name");
-	
+    $DBH = new PDO("sqlite:$db_name");
+    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
     echo "Database - $db_name<br /><br />";
 	
-    $result = $db->exec(   "INSERT INTO customer (id, organisation, street, postcode, city, phone, mobil, email) VALUES ('', 'Jugendhaus', 'Filderbahnplatz', '70619', 'Stuttgart', '0711/123456', '0170/02010000', 'bla@tipsntrips.de');
+    $result = $DBH->exec(   "INSERT INTO customer (id, organisation, street, postcode, city, phone, mobil, email) VALUES ('', 'Jugendhaus', 'Filderbahnplatz', '70619', 'Stuttgart', '0711/123456', '0170/02010000', 'bla@tipsntrips.de');
                             INSERT INTO customer (id, organisation, street, postcode, city, phone, mobil, email) VALUES ('', 'Kinderhaus', 'Langestr', '70378', 'Stuttgart', '0711/654321', '0170/2233222', 'kh@web.de');
 
                             INSERT INTO appointment (id, customer-id, datetime, contact, phone, mobil, email, number, contributor-id, listed-date, type-id, specialized-value) VALUES ('', '1', '2013-07-12 00:10:15', 'Fr. Mueller', '', '', '', '31', '1', '2013-05-07', '1', '');
@@ -30,7 +31,7 @@ try{
     ");
     
     //close the database connection
-    $db = NULL;
+    $DBH = NULL;
     
     echo $result. "rows inserted.";
     echo "To the <a href='index.php'>Startpage</a>.";

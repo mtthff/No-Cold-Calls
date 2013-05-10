@@ -2,14 +2,13 @@
 
 try {  
   $DBH = new PDO("sqlite:database.db");  
-//  $DBH->exec("
-//		CREATE TABLE IF NOT EXISTS user (
-//			id INT(255) NOT NULL auto_increment,
-//			name VARCHAR(255) NULL DEFAULT NULL,
-//			klasse VARCHAR(255) NULL DEFAULT NULL,
-//		  PRIMARY KEY (id)
-//		);
-//  ");
+  $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $DBH->exec("
+		CREATE TABLE IF NOT EXISTS user (
+			id INTEGER PRIMARY KEY,
+			name VARCHAR(255),
+			klasse VARCHAR(255));
+	");
   
   //Platzhalter mit Daten versehen und 
   $data = array( 'name' => 'Heinzl', 'klasse' => '1a');
