@@ -42,7 +42,7 @@ try{
             mobil VARCHAR(255),
             email VARCHAR(255),
             number INT(24) NULL,
-            listed-id INT(255),
+            contributor-id INT(255),
             listed-date DATE,
             type-id INT(255),
             specialized-value MEDIUMTEXT);        
