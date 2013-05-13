@@ -52,6 +52,8 @@
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/datepicker.css" rel="stylesheet">
+    <link href="css/timepicker.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -105,13 +107,19 @@
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
-                  <input type="text" id="inputDate" placeholder="Datum">
+                  <!--<input type="text" id="inputDate" placeholder="Datum">-->
+                    <!--<div class="control-label input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">-->
+                      <input class="datepicker" size="16" type="text" value="13.05.2013">
+                    <!--</div>-->
                 </div>
+                  
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputStarttime">Startzeit</label>
                 <div class="controls">
                   <input type="text" id="inputStarttime" placeholder="Startzeit">
+                  <input id="timepicker1" type="text" class="input-small">
+                <span class="add-on"><i class="icon-time"></i></span>
                 </div>
               </div>
               <div class="control-group">
@@ -205,7 +213,9 @@
     <script src="js/jquery-2.0.0.min.js"></script>
     <script src="js/jquery.tablesorter.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/bootstrap-timepicker.min.js"></script>
+    <script src="js/form-appointment.js"></script>
 
   </body>
 </html>
