@@ -101,43 +101,46 @@
           <div class="span12">
             <h3>Neuer Termin</h3>
           </div>
-          <form class="form-horizontal">
+          <form class="form-horizontal" action="show_submitted_data.php" method="post">
               <div class="span5">
 
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
-                    <input class="datepicker input-small" class="" type="text" placeholder="Datum">
+                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputStarttime">Startzeit</label>
                 <div class="controls">
-                    <input id="timepicker1" type="text" class="input-small" placeholder="Startzeit">
+                    <div class="input-append bootstrap-timepicker">
+                        <input type="text" class="timepicker input-small" placeholder="Startzeit">
+                        <span class="add-on"><i class="icon-time"></i></span>
+                    </div>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputOrganisation">Einrichtung/Schule</label>
                 <div class="controls">
-                  <input type="text" class="input-large" id="inputOrganisation" placeholder="Organisation">
+                  <input type="text" name="organisation" class="input-large" id="inputOrganisation" placeholder="Organisation">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputCustomer">Leiter</label>
                 <div class="controls">
-                  <input type="text" class="input-large" id="inputCustomer" placeholder="Leiter">
+                  <input type="text" name="customer" class="input-large" id="inputCustomer" placeholder="Leiter">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputPhone">Telefon</label>
                 <div class="controls">
-                  <input type="text" class="input-medium" id="inputPhone" placeholder="Telefon">
+                  <input type="text" name="phone" class="input-medium" id="inputPhone" placeholder="Telefon">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputMobil">Mobil</label>
                 <div class="controls">
-                  <input type="text" class="input-medium" id="inputMobil" placeholder="Mobil">
+                  <input type="text" name="mobil" class="input-medium" id="inputMobil" placeholder="Mobil">
                 </div>
               </div>
         </div>
@@ -145,37 +148,48 @@
               <div class="control-group">
                 <label class="control-label" for="inputClass">Klass/Alter</label>
                 <div class="controls">
-                  <input type="text" id="inputClass" placeholder="Klasse/Alter">
+                  <input type="text" name="class" id="inputClass" placeholder="Klasse/Alter">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputNumber">Teilnehmerzahl</label>
                 <div class="controls">
-                  <input type="text" id="inputNumber" placeholder="Teilnehmerzahl">
+                  <input type="text" name="number" id="inputNumber" class="input-mini">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="inputJuHe">Jugendherberge</label>
+                <div class="controls">
+                  <input type="checkbox" name="juhe" id="inputJuHe" value="true">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputTarif">Tarif</label>
                 <div class="controls">
-                  <input type="text" id="inputTarif" placeholder="Tarif">
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputJuHe">Jugenherberge</label>
-                <div class="controls">
-                  <input type="text" id="inputJuHe" placeholder="Jugendherberge">
+                    <select name="tarif">
+                      <option selected value="1">Klassik Ö - 1 €</option>
+                      <option value="2">Premium Ö - 2 €</option>
+                      <option value="3">Klassik P - 3 €</option>
+                      <option value="4">Premium P - 6 €</option>
+                    </select>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputVersion">Version</label>
                 <div class="controls">
-                  <input type="text" id="inputVersion" placeholder="Version">
+                    <select name="version">
+                      <option selected value="1">deutsch</option>
+                      <option value="2">englisch</option>
+                      <option value="3">französisch</option>
+                      <option value="4">polnisch</option>
+                      <option value="5">russisch</option>
+                    </select>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputFotoCD">Foto-CD</label>
                 <div class="controls">
-                  <input type="text" id="inputFotoCD" placeholder="Foto-CD">
+                  <input type="checkbox" name="fotocd" id="inputFotoCD" value="true">
                 </div>
               </div>
         </div>
@@ -184,11 +198,12 @@
               <div class="control-group">
                 <label class="control-label" for="inputComment">Bemerkung</label>
                 <div class="controls">
-                    <textarea class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"></textarea>
+                    <textarea name="comment" class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"></textarea>
 
                 </div>
               </div>
             
+                  <button type="submit" class="btn">Speichern</button>
         </div>
             </form>
             
