@@ -28,4 +28,21 @@ $( document ).ready(function() {
         }
     });
 
+    $('select[name=customer]').change(function(){
+       var customer_id = $(this).val();
+       var text = $(this).find(':selected').text();
+       $.post("ajax/get_customerdata.php",{
+           customer_id: customer_id,
+           text: text
+       }, function(data){
+//           alert(data);
+        //{"organisation":"Jugendhaus","phone":"0711\/123456","mobil":"0170\/02010000","email":"bla@tipsntrips.de"}
+               $('input#inputPhone').val(data.phone);
+               $('input#inputMobil').val(data.mobil);
+               $('input#inputEmail').val(data.email);
+               $('input#inputContact').val(data.contact);
+//           });
+           }, 'json');
+    });
+
 });

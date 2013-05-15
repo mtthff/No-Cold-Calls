@@ -1,41 +1,27 @@
 <?php
-//try{
-//    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
-//    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
-//
-//    $STH = $DBH->query('SELECT a.id,
-//                            strftime("%d.%m.%Y", a.datetime) AS day,
-//                            strftime("%H:%M", a.datetime) AS time,
-//                            cu.organisation,
-//                            a.contact,
-//                            a.phone AS appoint_phone,
-//                            a.mobil AS appoint_mobil,
-//                            cu.phone AS custom_phone,
-//                            cu.mobil AS custom_mobil,
-//                            a.number,
-//                            a.comment,
-//                            a.specialized_value,
-//                            co.name,
-//                            strftime("%d.%m.%Y", a.listed_date) AS listed_date
-//                        FROM appointment AS a
-//                        LEFT JOIN customer AS cu ON (a.customer_id = cu.id)
-//                        LEFT JOIN contributor AS co ON (a.contributor_id = co.id)
-//                        ORDER BY day ASC');
-//
-//    $STH->setFetchMode(PDO::FETCH_ASSOC);
-//    while($row = $STH->fetch()){
-//        $app[]= $row;
-//    }
-////    echo "<pre>";
-////    print_r($app);
-////    exit;
-//    
-//    
-//}
-//catch(PDOException $e) //Besonderheiten anzeigen
-//{
-//	print 'Exception : '.$e->getMessage();
-//}
+try{
+    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
+
+    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
+                            FROM customer as cu
+                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
+                            ORDER BY organisation ASC');
+
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $customer[]= $row;
+    }
+//    echo "<pre>";
+//    print_r($customer);
+//    exit;
+    
+    
+}
+catch(PDOException $e) //Besonderheiten anzeigen
+{
+	print 'Exception : '.$e->getMessage();
+}
 
 ?>
 
@@ -119,16 +105,27 @@
                     </div>
                 </div>
               </div>
+                  
               <div class="control-group">
-                <label class="control-label" for="inputOrganisation">Einrichtung/Schule</label>
+                <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
-                  <input type="text" name="organisation" class="input-large" id="inputOrganisation" placeholder="Organisation">
+                    <div class="input-append">
+                        <select name="customer" id="inputCustomer" >
+                            <option>Bitte wählen</option>
+                            <?php
+                                foreach ($customer as $value) {
+                                    echo '<option value="'.$value['id'].'">'.$value['organisation'].' - '.$value['contact'].'</option>';
+                                }
+                            ?>
+                        </select>
+                        <span class="add-on"><a href="form-organisation.php"><i class="icon-plus"></i></a></span>
+                    </div>
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="inputCustomer">Leiter</label>
+                <label class="control-label" for="inputContact">Leiter</label>
                 <div class="controls">
-                  <input type="text" name="customer" class="input-large" id="inputCustomer" placeholder="Leiter">
+                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter">
                 </div>
               </div>
               <div class="control-group">
@@ -143,10 +140,16 @@
                   <input type="text" name="mobil" class="input-medium" id="inputMobil" placeholder="Mobil">
                 </div>
               </div>
+              <div class="control-group">
+                <label class="control-label" for="inputEmail">Email</label>
+                <div class="controls">
+                  <input type="email" name="email" class="input-medium" id="inputEmail" placeholder="Mobil">
+                </div>
+              </div>
         </div>
         <div class="span5">
               <div class="control-group">
-                <label class="control-label" for="inputClass">Klass/Alter</label>
+                <label class="control-label" for="inputClass">Klasse/Alter</label>
                 <div class="controls">
                   <input type="text" name="class" id="inputClass" placeholder="Klasse/Alter">
                 </div>
