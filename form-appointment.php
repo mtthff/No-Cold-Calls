@@ -40,11 +40,13 @@ catch(PDOException $e) //Besonderheiten anzeigen
     <link href="css/style.css" rel="stylesheet">
     <link href="css/datepicker.css" rel="stylesheet">
     <link href="css/timepicker.min.css" rel="stylesheet">
+    <link href="css/jquery-ui-1.10.3.custom.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
+  	
     </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
 
@@ -110,15 +112,19 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-                        <select name="customer" id="inputCustomer" >
+<!--                        <select name="customer" id="inputCustomer" >
                             <option>Bitte wählen</option>
                             <?php
-                                foreach ($customer as $value) {
-                                    echo '<option value="'.$value['id'].'">'.$value['organisation'].' - '.$value['contact'].'</option>';
-                                }
+//                                foreach ($customer as $value) {
+//                                    echo '<option value="'.$value['id'].'">'.$value['organisation'].' - '.$value['contact'].'</option>';
+//                                }
                             ?>
-                        </select>
+                        </select>-->
+                        <input type="text" id="inputCustomer" class="input-large" placeholder="Schule">
                         <span class="add-on"><a href="form-organisation.php"><i class="icon-plus"></i></a></span>
+                    <br />
+                        
+
                     </div>
                 </div>
               </div>
@@ -195,6 +201,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                   <input type="checkbox" name="fotocd" id="inputFotoCD" value="true">
                 </div>
               </div>
+
         </div>
                   <div class="span2"></div>
           <div class="span12">
@@ -230,6 +237,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
     <script src="js/bootstrap-datepicker.js"></script>
     <script src="js/bootstrap-timepicker.min.js"></script>
     <script src="js/form-appointment.js"></script>
+    <script src="js/jquery-ui.autocomplete.min.js"></script>
 
   </body>
 </html>
