@@ -1,5 +1,5 @@
 <?php
-    $DBH = new PDO("sqlite:database.db");  
+    $DBH = new PDO("sqlite:nocoldcalls.sqlite");  
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $DBH->prepare("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
@@ -9,7 +9,7 @@
     $stmt->bindParam(':datetime', $datetime);
     $stmt->bindParam(':contact', $contact);
     $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':phone', $mobil);
+    $stmt->bindParam(':mobil', $mobil);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':number', $number);
     $stmt->bindParam(':comment', $comment);
@@ -36,9 +36,9 @@
         print_r($_POST);
         exit;
         
-        $customer;//::TODO::
+        $customer = $_POST['customer'];
         $datetime = $_POST['datum'].$_POST['hour'];
-        $contact;//::TODO::
+        $contact = $_POST['contact'];//::TODO::
         $phone = $_POST['phone'];
         $mobil = $_POST['mobil'];
         $email = $_POST['email'];
@@ -55,23 +55,21 @@
         
     
 /*
-(
-    [datum] => 15.05.2013
+    [datum] => 
     [hour] => 10
     [minute] => 15
-    [organisation] => Schule
-    [customer] => Fr. Schmitt
-    [phone] => 0711/ 373878
-    [mobil] => 1072/83473
-    [class] => 11. Klasse
-    [number] => 32
+    [customer] => Geschwister-Scholl-Gymnasium - 
+    [contact] => 
+    [phone] => 0711/ 994837
+    [mobil] => 
+    [email] => gsg@gsg-stuttgart-schule.de
+    [class] => 
+    [number] => 
     [tarif] => 1
     [version] => 1
-    [comment] => bla
+    [comment] => 
     [juhe] => false
-    [fotocd] => false
-)
-  
+    [fotocd] => false 
  */
 
 //    $stmt->execute();

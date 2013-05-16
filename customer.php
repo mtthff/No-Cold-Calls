@@ -83,7 +83,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         <!-- Example row of columns -->
       <div class="row">
         <div class="span12">
-          <h2>Kunden <a href="#" class="btn btn disabled">Neuen Kunden eingeben</a></h2>
+          <h2>Kunden <a href="form-customer.php" class="btn btn disabled">Neuen Kunden eingeben</a></h2>
           <table class="table table-hover table-condensed tablesorter" id="sortTable">
 
             <thead>

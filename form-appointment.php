@@ -1,27 +1,27 @@
 <?php
-try{
-    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
-    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
-
-    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
-                            FROM customer as cu
-                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
-                            ORDER BY organisation ASC');
-
-    $STH->setFetchMode(PDO::FETCH_ASSOC);
-    while($row = $STH->fetch()){
-        $customer[]= $row;
-    }
-//    echo "<pre>";
-//    print_r($customer);
-//    exit;
-    
-    
-}
-catch(PDOException $e) //Besonderheiten anzeigen
-{
-	print 'Exception : '.$e->getMessage();
-}
+//try{
+//    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+//    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
+//
+//    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
+//                            FROM customer as cu
+//                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
+//                            ORDER BY organisation ASC');
+//
+//    $STH->setFetchMode(PDO::FETCH_ASSOC);
+//    while($row = $STH->fetch()){
+//        $customer[]= $row;
+//    }
+////    echo "<pre>";
+////    print_r($customer);
+////    exit;
+//    
+//    
+//}
+//catch(PDOException $e) //Besonderheiten anzeigen
+//{
+//	print 'Exception : '.$e->getMessage();
+//}
 
 ?>
 
@@ -89,7 +89,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
           <div class="span12">
             <h3>Neuer Termin</h3>
           </div>
-          <form class="form-horizontal" action="show_submitted_data.php" method="post">
+          <form class="form-horizontal" action="save_appointment.php" method="post">
               <div class="span5">
 
               <div class="control-group">
@@ -112,19 +112,8 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-<!--                        <select name="customer" id="inputCustomer" >
-                            <option>Bitte wählen</option>
-                            <?php
-//                                foreach ($customer as $value) {
-//                                    echo '<option value="'.$value['id'].'">'.$value['organisation'].' - '.$value['contact'].'</option>';
-//                                }
-                            ?>
-                        </select>-->
-                        <input type="text" id="inputCustomer" class="input-large" placeholder="Schule">
-                        <span class="add-on"><a href="form-organisation.php"><i class="icon-plus"></i></a></span>
-                    <br />
-                        
-
+                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule">
+                        <span class="add-on"><a href="form-customer.php"><i class="icon-plus"></i></a></span>
                     </div>
                 </div>
               </div>
