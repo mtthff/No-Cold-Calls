@@ -4,7 +4,8 @@ $( document ).ready(function() {
 //    });
 //    
     $('i.icon-pencil').click(function(){
-        alert($(this).parent().parent().attr('id'));
+        var appointment_id = $(this).parent().parent().attr('id');
+        window.location.href="form-appointment.php?appointment_id="+appointment_id;
     });
     
     $('i.icon-trash').click(function(){

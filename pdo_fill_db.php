@@ -40,7 +40,7 @@ try{
     $stmt->execute($data);
     $data = array(  'status_id' => '1', 'customer_id' => '3', 'datetime' => '2013-08-12 10:15:00','contact' => 'Fr. Eberhard','phone' => '','mobil' => '','email' => '','number' => '24','comment' => '-','contributor_id' => '3','listed_date' => '2013-03-07','type_id' => '1','age' => '5. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '');
     $stmt->execute($data);
-    $data = array(  'status_id' => '1', 'customer_id' => '1', 'datetime' => '2013-10-01 15:00:00','contact' => 'Fr. Bart','phone' => '','mobil' => '','email' => '','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-17','type_id' => '1','age' => '17-19 Jahre','tarif_id' => '2','juhe' => '1','version_id' => '1','fotocd' => '1');
+    $data = array(  'status_id' => '1', 'customer_id' => '4', 'datetime' => '2013-10-01 15:00:00','contact' => 'Fr. Bart','phone' => '','mobil' => '','email' => '','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-17','type_id' => '1','age' => '17-19 Jahre','tarif_id' => '2','juhe' => '1','version_id' => '1','fotocd' => '1');
     $stmt->execute($data);
     $data = array(  'status_id' => '1', 'customer_id' => '2', 'datetime' => '2013-11-03 10:15:00','contact' => 'Fr. Olluzr','phone' => '','mobil' => '','email' => '','number' => '18','comment' => '-','contributor_id' => '2','listed_date' => '2013-02-10','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '3','fotocd' => '1');
     $stmt->execute($data);

@@ -1,27 +1,66 @@
 <?php
-//try{
-//    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
-//    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
-//
-//    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
-//                            FROM customer as cu
-//                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
-//                            ORDER BY organisation ASC');
-//
-//    $STH->setFetchMode(PDO::FETCH_ASSOC);
-//    while($row = $STH->fetch()){
-//        $customer[]= $row;
-//    }
-////    echo "<pre>";
-////    print_r($customer);
-////    exit;
-//    
-//    
-//}
-//catch(PDOException $e) //Besonderheiten anzeigen
-//{
-//	print 'Exception : '.$e->getMessage();
-//}
+//echo $_GET['appointment_id'];
+try{
+    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
+
+    $STH = $DBH->query('SELECT 
+                            strftime("%d.%m.%Y", ap.datetime) AS day,
+                            strftime("%H:%M", ap.datetime) AS time,
+                            cu.organisation,
+                            ap.contact,
+                            ap.phone AS appoint_phone,
+                            ap.mobil AS appoint_mobil,
+                            ap.email AS appoint_email,
+                            cu.phone AS custom_phone,
+                            cu.mobil AS custom_mobil,
+                            cu.email AS custom_email,
+                            ap.number,
+                            ap.comment,
+                            ap.type_id,
+                            ap.age,
+                            ap.tarif_id,
+                            ap.juhe,
+                            ap.version_id,
+                            co.name,
+                            strftime("%d.%m.%Y", ap.listed_date) AS listed_date
+                        FROM appointment AS ap
+                        LEFT JOIN customer AS cu ON (ap.customer_id = cu.id)
+                        LEFT JOIN contributor AS co ON (ap.contributor_id = co.id)
+                        WHERE ap.id = '.(int)$_GET['appointment_id']);
+
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    $row = $STH->fetch();
+            
+//    echo "<pre>";
+//    print_r($row);
+//    exit;
+    
+    /*
+     *     [day] => 18.09.2013
+    [time] => 10:15
+    [organisation] => Kinderhaus
+    [contact] => Fr. Lockum
+    [appoint_phone] => 
+    [appoint_mobil] => 
+    [custom_phone] => 0711/654321
+    [custom_mobil] => 0170/2233222
+    [number] => 33
+    [comment] => -
+    [type_id] => 1
+    [age] => 8. Klasse
+    [tarif_id] => 2
+    [juhe] => 1
+    [version_id] => 2
+    [name] => Tom
+    [listed_date] => 06.05.2013
+     */
+    
+}
+catch(PDOException $e) //Besonderheiten anzeigen
+{
+	print 'Exception : '.$e->getMessage();
+}
 
 ?>
 
@@ -95,14 +134,14 @@
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
-                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum">
+                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum" value="<?php echo $row['day'] ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputStarttime">Startzeit</label>
                 <div class="controls">
                     <div class="input-append bootstrap-timepicker">
-                        <input type="text" class="timepicker input-small" placeholder="Startzeit">
+                        <input type="text" class="timepicker input-small" placeholder="Startzeit" value="<?php echo $row['time'] ?>">
                         <span class="add-on"><i class="icon-time"></i></span>
                     </div>
                 </div>
@@ -112,7 +151,7 @@
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule">
+                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $row['organisation'] ?>">
                         <span class="add-on"><a href="form-customer.php"><i class="icon-plus"></i></a></span>
                     </div>
                 </div>
@@ -120,25 +159,25 @@
               <div class="control-group">
                 <label class="control-label" for="inputContact">Leiter</label>
                 <div class="controls">
-                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter">
+                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter"  value="<?php echo $row['contact'] ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputPhone">Telefon</label>
                 <div class="controls">
-                  <input type="text" name="phone" class="input-medium" id="inputPhone" placeholder="Telefon">
+                  <input type="text" name="phone" class="input-large" id="inputPhone" placeholder="Telefon" value="<?php echo $row['custom_phone']//::TODO:: ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputMobil">Mobil</label>
                 <div class="controls">
-                  <input type="text" name="mobil" class="input-medium" id="inputMobil" placeholder="Mobil">
+                  <input type="text" name="mobil" class="input-large" id="inputMobil" placeholder="Mobil" value="<?php echo $row['custom_mobil']// ::TODO:: ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputEmail">Email</label>
                 <div class="controls">
-                  <input type="email" name="email" class="input-medium" id="inputEmail" placeholder="Mobil">
+                  <input type="email" name="email" class="input-large" id="inputEmail" placeholder="email" value="<?php echo $row['custom_email'] ?>">
                 </div>
               </div>
         </div>
@@ -146,13 +185,13 @@
               <div class="control-group">
                 <label class="control-label" for="inputClass">Klasse/Alter</label>
                 <div class="controls">
-                  <input type="text" name="class" id="inputClass" placeholder="Klasse/Alter">
+                  <input type="text" name="class" id="inputClass" placeholder="Klasse/Alter" value="<?php echo $row['age'] ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputNumber">Teilnehmerzahl</label>
                 <div class="controls">
-                  <input type="text" name="number" id="inputNumber" class="input-mini">
+                  <input type="text" name="number" id="inputNumber" class="input-mini" value="<?php echo $row['number'] ?>">
                 </div>
               </div>
               <div class="control-group">
@@ -197,7 +236,7 @@
               <div class="control-group">
                 <label class="control-label" for="inputComment">Bemerkung</label>
                 <div class="controls">
-                    <textarea name="comment" class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"></textarea>
+                    <textarea name="comment" class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"><?php echo $row['comment'] ?></textarea>
 
                 </div>
               </div>

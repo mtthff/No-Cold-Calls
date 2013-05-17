@@ -24,7 +24,7 @@ try{
                         FROM appointment AS a
                         LEFT JOIN customer AS cu ON (a.customer_id = cu.id)
                         LEFT JOIN contributor AS co ON (a.contributor_id = co.id)
-                        ORDER BY day ASC');
+                        ORDER BY a.datetime ASC');
 
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     while($row = $STH->fetch()){
