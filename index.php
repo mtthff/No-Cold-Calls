@@ -14,7 +14,11 @@ try{
                             cu.mobil AS custom_mobil,
                             a.number,
                             a.comment,
-                            a.specialized_value,
+                            a.type_id,
+                            a.age,
+                            a.tarif_id,
+                            a.juhe,
+                            a.version_id,
                             co.name,
                             strftime("%d.%m.%Y", a.listed_date) AS listed_date
                         FROM appointment AS a
@@ -124,13 +128,12 @@ catch(PDOException $e) //Besonderheiten anzeigen
 <?php
 
     foreach ($app as $value) {
-        $spec = unserialize($value['specialized_value']);
         
         if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
         if (!$phone = $value['appoint_mobil']) $phone = $value['custom_mobil'];
         
-        if ($spec['JuHe']) $juhe = '<i class="icon-ok">'; 
-        if ($spec['Foto-CD']) $fotoCD = '<i class="icon-ok">'; 
+        if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
+        if ($value['fotocd']) $fotoCD = '<i class="icon-ok">'; 
         
         echo '<tr id="'.$value['id'].'">';
         echo '<td>'.$value['day'].'</td>';
@@ -138,14 +141,14 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$value['organisation'].'</td>';
         echo '<td>'.$value['contact'].'</td>';
         echo '<td>'.$phone.'</td>';
-        echo '<td>'.$spec['Klassenstufe'].'</td>';
+        echo '<td>'.$value['age'].'</td>';
         echo '<td>'.$value['number'].'</td>';
-        echo '<td>'.$spec['Tarif'].'</td>';
+        echo '<td>'.$value['tarif_id'].'</td>';
         echo '<td>'.$juhe.'</td>';
-        echo '<td>'.$spec['Version'].'</td>';
+        echo '<td>'.$value['version_id'].'</td>';
         echo '<td>'.$fotoCD.'</td>';
         echo '<td>'.$value['comment'].'</td>';
-        echo '<td>'.$value['name'].'</td>';
+        echo '<td>'.$value['label'].'</td>';
         echo '<td>'.$value['listed_date'].'</td>';
         echo '<td><i id="edit" class="icon-pencil"></i></td>';
         echo '<td><i class="icon-trash"></i></td>';                    

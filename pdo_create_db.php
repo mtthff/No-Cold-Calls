@@ -93,7 +93,7 @@ try{
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS contributor (
           id INTEGER PRIMARY KEY,
-          label INTEGER
+          name TEXT
           );
     ");
     echo "Table <i>contributor</i> created. <br />";    
