@@ -10,27 +10,20 @@ try{
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);	
     echo "Database - $db_name<br /><br />";
 	
-    //create a table in the database
-/*
- * 		CREATE TABLE IF NOT EXISTS user (
-			id INTEGER PRIMARY KEY,
-			name VARCHAR(255),
-			klasse VARCHAR(255));
- */    
     //Table CUSTOMER
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS customer (
             id INTEGER PRIMARY KEY,
-            organisation VARCHAR(255),
-            street VARCHAR(255),
-            postcode INT(5),
-            city VARCHAR(255),
-            phone VARCHAR(255),
-            mobil VARCHAR(255),
-            email VARCHAR(255),
-            listed_since DATE,
+            organisation TEXT,
+            street TEXT,
+            postcode INTEGER,
+            city TEXT,
+            phone TEXT,
+            mobil TEXT,
+            email TEXT,
+            listed_since NUMERIC,
             contributor_id INTEGER
-            );
+        );
     ");
     echo "Table <i>customer</i> created. <br />";
 	
@@ -38,44 +31,70 @@ try{
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS appointment (
             id INTEGER PRIMARY KEY,
+            status_id INTEGER,
             customer_id INTEGER,
-            datetime DATETIME,
-            contact VARCHAR(255),
-            phone VARCHAR(255),
-            mobil VARCHAR(255),
-            email VARCHAR(255),
-            number INT(24) NULL,
+            datetime NUMERIC,
+            contact TEXT,
+            phone TEXT,
+            mobil TEXT,
+            email TEXT,
+            number INTEGER,
             comment TEXT,
             contributor_id INTEGER,
-            listed_date DATE,
-            type_id INT(255),
-            specialized_value TEXT);        
+            listed_date NUMERIC,
+            type_id INTEGER,
+            age TEXT,
+            tarif_id INTEGER,
+            juhe NUMERIC,
+            version_id INTEGER,
+            fotocd NUMERIC
+            );        
     ");
     echo "Table <i>appointment</i> created. <br />";
     
-   //Table SPECIALIZED
+   //Table APPOINTMENT_TYPE
     $DBH->exec("
-        CREATE TABLE IF NOT EXISTS specialized (
+        CREATE TABLE IF NOT EXISTS appointment_type (
           id INTEGER PRIMARY KEY,
-          name VARCHAR(255),
-          type_id INTEGER,
-          status BOOLEAN);
+          label TEXT
+          );
     ");
-    echo "Table <i>specialized</i> created. <br />";
+    echo "Table <i>appointment_type</i> created. <br />";    
     
-   //Table TYPE
+   //Table APPOINTMENT_STATUS
     $DBH->exec("
-        CREATE TABLE IF NOT EXISTS type (
+        CREATE TABLE IF NOT EXISTS appointment_status (
           id INTEGER PRIMARY KEY,
-          name VARCHAR(255));
+          label TEXT
+          );
     ");
-    echo "Table <i>type</i> created. <br />";    
+    echo "Table <i>appointment_status</i> created. <br />";
+    
+   
+   //Table APPOINTMENT_TARIF
+    $DBH->exec("
+        CREATE TABLE IF NOT EXISTS appointment_tarif (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
+    ");
+    echo "Table <i>appointment_tarif</i> created. <br />";
+    
+   //Table APPOINTMENT_VERSION
+    $DBH->exec("
+        CREATE TABLE IF NOT EXISTS appointment_version (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
+    ");
+    echo "Table <i>appointment_version</i> created. <br />";
     
    //Table CONTRIBUTOR
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS contributor (
           id INTEGER PRIMARY KEY,
-          name VARCHAR(255));
+          label INTEGER
+          );
     ");
     echo "Table <i>contributor</i> created. <br />";    
     
