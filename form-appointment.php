@@ -1,4 +1,5 @@
 <?php
+session_start();
 //echo $_GET['appointment_id'];
 try{
     $db_name = 'data/nocoldcalls.sqlite';
@@ -7,16 +8,16 @@ try{
 
     if ($_GET['customer_id']){
         
-           $STH = $DBH->query('SELECT organisation, phone AS custom_phone, email as custom_email
+           $STH = $DBH->query('SELECT organisation AS customer, phone AS custom_phone, email as custom_email
                             FROM customer
                             WHERE id = '.$_GET['customer_id']);
     }
-    else{
-        
+    else
+    {
         $STH = $DBH->query('SELECT 
-                                strftime("%d.%m.%Y", ap.datetime) AS day,
+                                strftime("%d.%m.%Y", ap.datetime) AS datum,
                                 strftime("%H:%M", ap.datetime) AS time,
-                                cu.organisation,
+                                cu.organisation AS customer,
                                 ap.contact,
                                 ap.phone AS appoint_phone,
                                 ap.email AS appoint_email,
@@ -36,29 +37,47 @@ try{
                             LEFT JOIN contributor AS co ON (ap.contributor_id = co.id)
                             WHERE ap.id = '.(int)$_GET['appointment_id']);
     }
+    
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     $row = $STH->fetch();
-            
+    if($row){
+        foreach ($row as $key => $value) {
+            $_SESSION[$key] = $value;
+        }
+    }
+    
+    $STH = $DBH->query('SELECT id, label FROM appointment_status');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $appointment_status[]= $row;
+    }
+    
+    
 //    echo "<pre>";
+//    print_r($appointment_status);
+//    exit;
+//    echo "row:<br />";
 //    print_r($row);
+//    echo "session:<br />";
+//    print_r($_SESSION);
 //    exit;
     
     /*
-     *     [day] => 18.09.2013
+    [datum] => 22.05.2013
+    [hour] => 10
+    [minute] => 15
     [time] => 10:15
-    [organisation] => Kinderhaus
-    [contact] => Fr. Lockum
-    [appoint_phone] => 
-    [custom_phone] => 0711/654321
-    [number] => 33
-    [comment] => -
-    [type_id] => 1
-    [age] => 8. Klasse
-    [tarif_id] => 2
-    [juhe] => 1
-    [version_id] => 2
-    [name] => Tom
-    [listed_date] => 06.05.2013
+    [customer] => gsdfgdsfg
+    [contact] => ewrt
+    [phone] => 
+    [email] => 
+    [age] => 
+    [number] => 
+    [tarif_id] => 1
+    [version_id] => 1
+    [comment] => 
+    [juhe] => false
+    [fotocd] => false
      */
     
 }
@@ -134,19 +153,20 @@ catch(PDOException $e) //Besonderheiten anzeigen
             <h3>Neuer Termin</h3>
           </div>
           <form class="form-horizontal" action="save_appointment.php" method="post">
+              <input type="hidden" name="contributor_id" value="1">
               <div class="span5">
 
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
-                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum" value="<?php echo $row['day'] ?>" required>
+                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum" value="<?php echo $_SESSION['datum'] ?>" required>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputStarttime">Startzeit</label>
                 <div class="controls">
                     <div class="input-append bootstrap-timepicker">
-                        <input type="text" class="timepicker input-small" placeholder="Startzeit" value="<?php echo $row['time'] ?>">
+                        <input type="text" name="time" class="timepicker input-small" placeholder="Startzeit" value="<?php echo $_SESSION['time'] ?>">
                         <span class="add-on"><i class="icon-time"></i></span>
                     </div>
                 </div>
@@ -156,7 +176,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $row['organisation'] ?>" required>
+                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $_SESSION['customer'] ?>" required>
                         <span class="add-on"><a href="form-customer.php?ref=newAppointment"><i class="icon-plus"></i></a></span>
                     </div>
                 </div>
@@ -164,19 +184,19 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputContact">Leiter</label>
                 <div class="controls">
-                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter"  value="<?php echo $row['contact'] ?>" required>
+                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter"  value="<?php echo $_SESSION['contact'] ?>" required>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputPhone">Telefon</label>
                 <div class="controls">
-                  <input type="text" name="phone" class="input-large" id="inputPhone" placeholder="Telefon" value="<?php echo $row['custom_phone']//::TODO:: ?>">
+                  <input type="text" name="phone" class="input-large" id="inputPhone" placeholder="Telefon" value="<?php echo $_SESSION['custom_phone']//::TODO:: ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputEmail">Email</label>
                 <div class="controls">
-                  <input type="email" name="email" class="input-large" id="inputEmail" placeholder="email" value="<?php echo $row['custom_email'] ?>">
+                  <input type="email" name="email" class="input-large" id="inputEmail" placeholder="email" value="<?php echo $_SESSION['custom_email'] ?>">
                 </div>
               </div>
         </div>
@@ -184,13 +204,13 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputClass">Klasse/Alter</label>
                 <div class="controls">
-                  <input type="text" name="class" id="inputClass" placeholder="Klasse/Alter" value="<?php echo $row['age'] ?>">
+                  <input type="text" name="age" id="inputClass" placeholder="Klasse/Alter" value="<?php echo $_SESSION['age'] ?>">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputNumber">Teilnehmerzahl</label>
                 <div class="controls">
-                  <input type="text" name="number" id="inputNumber" class="input-mini" value="<?php echo $row['number'] ?>">
+                  <input type="text" name="number" id="inputNumber" class="input-mini" value="<?php echo $_SESSION['number'] ?>">
                 </div>
               </div>
               <div class="control-group">
@@ -202,7 +222,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputTarif">Tarif</label>
                 <div class="controls">
-                    <select name="tarif">
+                    <select name="tarif_id">
                       <option selected value="1">Klassik Ö - 1 €</option>
                       <option value="2">Premium Ö - 2 €</option>
                       <option value="3">Klassik P - 3 €</option>
@@ -213,7 +233,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputVersion">Version</label>
                 <div class="controls">
-                    <select name="version">
+                    <select name="version_id">
                       <option selected value="1">deutsch</option>
                       <option value="2">englisch</option>
                       <option value="3">französisch</option>
@@ -231,18 +251,33 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
         </div>
                   <div class="span2"></div>
-          <div class="span12">
+        <div class="span12">
               <div class="control-group">
                 <label class="control-label" for="inputComment">Bemerkung</label>
                 <div class="controls">
-                    <textarea name="comment" class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"><?php echo $row['comment'] ?></textarea>
+                    <textarea name="comment" class="input-xxlarge" rows="5" id="inputComment" placeholder="Bemerkung"><?php echo $_SESSION['comment'] ?></textarea>
 
                 </div>
               </div>
-            
-                  <button type="submit" class="btn">Speichern</button>
+              <div class="control-group">
+                <label class="control-label" for="status">Status</label>
+                <div class="controls">
+                    <input type="hidden" name="status_id" id="status_id" value="" />
+                    <div class="btn-group status_id" data-toggle="buttons-radio">
+                        <?php
+                        foreach ($appointment_status as $value) {
+                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                        }
+                        ?>
+                    </div>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label"></label>
+                <button type="submit" class="btn">Speichern</button>
+              </div>
         </div>
-            </form>
+        </form>
             
         </div>
       </div>

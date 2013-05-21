@@ -1,4 +1,6 @@
 <?php
+session_start();
+session_destroy();
 try{
     $db_name = 'data/nocoldcalls.sqlite';
     $DBH = new PDO("sqlite:$db_name");

@@ -1,8 +1,18 @@
 $( document ).ready(function() {
+    
     $('.datepicker').datepicker({
         'format': 'dd.mm.yyyy',
         'autoclose': true
-    });
+        }).on('changeDate', function(ev){
+            var inputValue = $(this).val();
+            var inputName = $(this).attr('name');
+            $.post('ajax/value2session.php',{
+                value: inputValue,
+                name: inputName
+            });
+
+        });
+
     
     $('.timepicker').timepicker({
         showMeridian: false,
@@ -28,6 +38,11 @@ $( document ).ready(function() {
         }
     });
 
+    //Value des geklickten staus_id-buttonin hidden variable schreiben
+    $(".status_id .btn").click(function() {
+        // whenever a button is clicked, set the hidden helper
+        $("#status_id").val($(this).val());
+    })
 
     $('input#inputCustomer').autocomplete({
         source: 'ajax/get_organisations.php',
@@ -43,6 +58,23 @@ $( document ).ready(function() {
             $('input#inputContact').val(data.contact);
         }, 'json');
       }
+    }).change(function(){
+        var inputValue = $(this).val();
+        var inputName = $(this).attr('name');
+        $.post('ajax/value2session.php',{
+            value: inputValue,
+            name: inputName
+        });
+    });
+    
+    // input- und textarea-value in Session speichern
+    $('input, textarea').change(function(){
+        var inputValue = $(this).val();
+        var inputName = $(this).attr('name');
+        $.post('ajax/value2session.php',{
+            value: inputValue,
+            name: inputName
+        });
     });
 
 

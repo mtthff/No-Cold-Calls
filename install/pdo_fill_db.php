@@ -60,26 +60,26 @@ try{
     /*------------------------------------------------*/    
     
     $DBH->exec("DELETE FROM appointment_status");
-    $DBH->exec("INSERT INTO appointment_status (label) VALUES ('aktiv');
-                INSERT INTO appointment_status (label) VALUES ('angefragt');
+    $DBH->exec("INSERT INTO appointment_status (label) VALUES ('angefragt');
+                INSERT INTO appointment_status (label) VALUES ('gebucht');
                 INSERT INTO appointment_status (label) VALUES ('abgesagt');
     ");
 
     /*------------------------------------------------*/    
     $DBH->exec("DELETE FROM appointment_tarif");
-    $DBH->exec("INSERT INTO appointment_status (label) VALUES ('Klassik Ö');
-                INSERT INTO appointment_status (label) VALUES ('Premium Ö');
-                INSERT INTO appointment_status (label) VALUES ('Klassik P');
-                INSERT INTO appointment_status (label) VALUES ('Premium P');
+    $DBH->exec("INSERT INTO appointment_tarif (label) VALUES ('Klassik Ö');
+                INSERT INTO appointment_tarif (label) VALUES ('Premium Ö');
+                INSERT INTO appointment_tarif (label) VALUES ('Klassik P');
+                INSERT INTO appointment_tarif (label) VALUES ('Premium P');
     ");
 
     /*------------------------------------------------*/    
     $DBH->exec("DELETE FROM appointment_version");
-    $DBH->exec("INSERT INTO appointment_status (label) VALUES ('deutsch');
-                INSERT INTO appointment_status (label) VALUES ('Englisch');
-                INSERT INTO appointment_status (label) VALUES ('Französisch');
-                INSERT INTO appointment_status (label) VALUES ('Polnisch');
-                INSERT INTO appointment_status (label) VALUES ('Russisch');
+    $DBH->exec("INSERT INTO appointment_version (label) VALUES ('deutsch');
+                INSERT INTO appointment_version (label) VALUES ('Englisch');
+                INSERT INTO appointment_version (label) VALUES ('Französisch');
+                INSERT INTO appointment_version (label) VALUES ('Polnisch');
+                INSERT INTO appointment_version (label) VALUES ('Russisch');
     ");
 
     /*------------------------------------------------*/    

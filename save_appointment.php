@@ -1,24 +1,50 @@
 <?php
-    $db_name = 'data/nocoldcalls.sqlite';
-    $DBH = new PDO("sqlite:$db_name");
-    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//    $db_name = 'data/nocoldcalls.sqlite';
+//    $DBH = new PDO("sqlite:$db_name");
+//    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//
+//    $stmt = $DBH->prepare("INSERT INTO appointment (status_id, customer_id, datetime, contact, phone, email, number, comment, contributor_id, listed_date, type_id, age, tarif_id, juhe, version_id, fotocd) 
+//                  VALUES (:status_id, :customer_id, :datetime, :contact, :phone, :email, :number, :comment, :contributor_id, :listed_date, :type_id, :age, :tarif_id, :juhe, :version_id, :fotocd);");
+//    
+//    $stmt->bindParam(':status_id', $status);
+//    $stmt->bindParam(':customer_id', $customer_id);
+//    $stmt->bindParam(':datetime', $datetime);
+//    $stmt->bindParam(':contact', $contact);
+//    $stmt->bindParam(':phone', $phone);
+//    $stmt->bindParam(':email', $email);
+//    $stmt->bindParam(':number', $number);
+//    $stmt->bindParam(':comment', $comment);
+//    $stmt->bindParam(':contributor_id', $contributor_id);
+//    $stmt->bindParam(':listed_date', $listed_date);
+//    $stmt->bindParam(':type_id', $type_id);
+//    $stmt->bindParam(':age', $age);
+//    $stmt->bindParam(':tarif_id', $tairf_id);
+//    $stmt->bindParam(':juhe', $juhe);
+//    $stmt->bindParam(':version_id', $version_id);
+//    $stmt->bindParam(':fotocd', $fotocd);
 
-    $stmt = $DBH->prepare("INSERT INTO appointment (customer_id, datetime, contact, phone, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
-                           VALUES (:customer_id, :datetime, :contact, :phone, :email, :number, :comment, :contributor_id, :listed_date, :type_id, :specialized_value);");
-    
-    $stmt->bindParam(':customer', $customer);
-    $stmt->bindParam(':datetime', $datetime);
-    $stmt->bindParam(':contact', $contact);
-    $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':number', $number);
-    $stmt->bindParam(':comment', $comment);
-    $stmt->bindParam(':contributor_id', $contributor_id);
-    $stmt->bindParam(':listed_date', $listed_date);
-    $stmt->bindParam(':type_id', $type_id);
-    $stmt->bindParam(':specialized_value', $specialized_value);
-    
-    
+/*
+    [contributor_id] => 1
+    [datum] => 31.05.2013
+    [hour] => 10
+    [minute] => 15
+    [time] => 10:15
+    [customer] => gsdfgdsfg
+    [contact] => sadf
+    [phone] => 
+    [email] => 
+    [age] => 
+    [number] => 
+    [tarif_id] => 1
+    [version_id] => 1
+    [comment] => 
+    [juhe] => false
+    [fotocd] => false
+ */
+    session_start();
+    echo "<pre>";
+    print_r($_SESSION);
+    session_destroy();
     
     ?>
 
