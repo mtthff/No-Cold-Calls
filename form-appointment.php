@@ -5,29 +5,37 @@ try{
     $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $STH = $DBH->query('SELECT 
-                            strftime("%d.%m.%Y", ap.datetime) AS day,
-                            strftime("%H:%M", ap.datetime) AS time,
-                            cu.organisation,
-                            ap.contact,
-                            ap.phone AS appoint_phone,
-                            ap.email AS appoint_email,
-                            cu.phone AS custom_phone,
-                            cu.email AS custom_email,
-                            ap.number,
-                            ap.comment,
-                            ap.type_id,
-                            ap.age,
-                            ap.tarif_id,
-                            ap.juhe,
-                            ap.version_id,
-                            co.name,
-                            strftime("%d.%m.%Y", ap.listed_date) AS listed_date
-                        FROM appointment AS ap
-                        LEFT JOIN customer AS cu ON (ap.customer_id = cu.id)
-                        LEFT JOIN contributor AS co ON (ap.contributor_id = co.id)
-                        WHERE ap.id = '.(int)$_GET['appointment_id']);
-
+    if ($_GET['customer_id']){
+        
+           $STH = $DBH->query('SELECT organisation, phone AS custom_phone, email as custom_email
+                            FROM customer
+                            WHERE id = '.$_GET['customer_id']);
+    }
+    else{
+        
+        $STH = $DBH->query('SELECT 
+                                strftime("%d.%m.%Y", ap.datetime) AS day,
+                                strftime("%H:%M", ap.datetime) AS time,
+                                cu.organisation,
+                                ap.contact,
+                                ap.phone AS appoint_phone,
+                                ap.email AS appoint_email,
+                                cu.phone AS custom_phone,
+                                cu.email AS custom_email,
+                                ap.number,
+                                ap.comment,
+                                ap.type_id,
+                                ap.age,
+                                ap.tarif_id,
+                                ap.juhe,
+                                ap.version_id,
+                                co.name,
+                                strftime("%d.%m.%Y", ap.listed_date) AS listed_date
+                            FROM appointment AS ap
+                            LEFT JOIN customer AS cu ON (ap.customer_id = cu.id)
+                            LEFT JOIN contributor AS co ON (ap.contributor_id = co.id)
+                            WHERE ap.id = '.(int)$_GET['appointment_id']);
+    }
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     $row = $STH->fetch();
             
@@ -131,7 +139,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputDate">Datum</label>
                 <div class="controls">
-                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum" value="<?php echo $row['day'] ?>">
+                    <input type="text" name="datum" class="datepicker input-small" placeholder="Datum" value="<?php echo $row['day'] ?>" required>
                 </div>
               </div>
               <div class="control-group">
@@ -148,15 +156,15 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $row['organisation'] ?>">
-                        <span class="add-on"><a href="form-customer.php"><i class="icon-plus"></i></a></span>
+                        <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $row['organisation'] ?>" required>
+                        <span class="add-on"><a href="form-customer.php?ref=newAppointment"><i class="icon-plus"></i></a></span>
                     </div>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputContact">Leiter</label>
                 <div class="controls">
-                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter"  value="<?php echo $row['contact'] ?>">
+                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter"  value="<?php echo $row['contact'] ?>" required>
                 </div>
               </div>
               <div class="control-group">

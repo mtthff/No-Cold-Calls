@@ -1,4 +1,8 @@
 <?php
+
+///no-cold-calls/form-customer.php
+
+
 //try{
 //    $db_name = 'data/nocoldcalls.sqlite';
 //    $DBH = new PDO("sqlite:$db_name");
@@ -88,13 +92,14 @@
             <h3>Neuer Kunde</h3>
           </div>
           <form class="form-horizontal" action="save_customer.php" method="post">
+              <input type="hidden" name="referrer" value="<? echo $_GET['ref']; ?>">
               <div class="span7">
 
               <div class="control-group">
                 <label class="control-label" for="inputOrganisation">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
-                        <input type="text" name="organisation" id="inputOrganisation" class="input-large" placeholder="Schule">
+                        <input type="text" name="organisation" id="inputOrganisation" class="input-large" placeholder="Schule" required>
                     </div>
                 </div>
               </div>

@@ -4,7 +4,7 @@
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $DBH->prepare("INSERT INTO appointment (customer_id, datetime, contact, phone, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
-                           VALUES (:customer_id, :datetime, :contact, :phone, ::email, :number, :comment, :contributor_id, :listed_date, :type_id, :specialized_value);");
+                           VALUES (:customer_id, :datetime, :contact, :phone, :email, :number, :comment, :contributor_id, :listed_date, :type_id, :specialized_value);");
     
     $stmt->bindParam(':customer', $customer);
     $stmt->bindParam(':datetime', $datetime);

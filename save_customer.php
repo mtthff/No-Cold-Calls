@@ -1,4 +1,19 @@
 <?php
+//echo "<pre>";
+//print_r($_POST);
+//exit;
+
+//Array
+//(
+//    [referrer] => newAppointment
+//    [organisation] => 
+//    [street] => 
+//    [postcode] => 
+//    [city] => 
+//    [phone] => 
+//    [email] => 
+//)
+
 try{
     $db_name = 'data/nocoldcalls.sqlite';
     $DBH = new PDO("sqlite:$db_name");
@@ -31,8 +46,20 @@ try{
    
 
     $stmt->execute();
+    $last_id = $DBH->lastInsertId(); 
 
-    header("Location: customer.php");
+    switch ($_POST['referrer']) {
+        case 'newAppointment':
+            header("Location: form-appointment.php?customer_id=".$last_id);
+            break;
+
+        case 'newCustomer':
+            header("Location: customer.php");            
+            break;
+        default :
+            echo "Fehler";
+    }
+
 }
 catch(PDOException $e) //Besonderheiten anzeigen
 {
