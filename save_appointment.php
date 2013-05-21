@@ -1,15 +1,15 @@
 <?php
-    $DBH = new PDO("sqlite:nocoldcalls.sqlite");  
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $DBH->prepare("INSERT INTO appointment (customer_id, datetime, contact, phone, mobil, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
-                           VALUES (:customer_id, :datetime, :contact, :phone, :mobil, :email, :number, :comment, :contributor_id, :listed_date, :type_id, :specialized_value);");
+    $stmt = $DBH->prepare("INSERT INTO appointment (customer_id, datetime, contact, phone, email, number, comment, contributor_id, listed_date, type_id, specialized_value) 
+                           VALUES (:customer_id, :datetime, :contact, :phone, ::email, :number, :comment, :contributor_id, :listed_date, :type_id, :specialized_value);");
     
     $stmt->bindParam(':customer', $customer);
     $stmt->bindParam(':datetime', $datetime);
     $stmt->bindParam(':contact', $contact);
     $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':mobil', $mobil);
     $stmt->bindParam(':email', $email);
     $stmt->bindParam(':number', $number);
     $stmt->bindParam(':comment', $comment);
@@ -40,7 +40,6 @@
         $datetime = $_POST['datum'].$_POST['hour'];
         $contact = $_POST['contact'];//::TODO::
         $phone = $_POST['phone'];
-        $mobil = $_POST['mobil'];
         $email = $_POST['email'];
         $number = $_POST['number'];
         $comment = $_POST['comment'];
@@ -61,7 +60,6 @@
     [customer] => Geschwister-Scholl-Gymnasium - 
     [contact] => 
     [phone] => 0711/ 994837
-    [mobil] => 
     [email] => gsg@gsg-stuttgart-schule.de
     [class] => 
     [number] => 

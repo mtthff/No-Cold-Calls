@@ -37,9 +37,8 @@ $( document ).ready(function() {
             customer_id: ui.item.id,
             text: ui.item.value
         }, function(data){
-        //{"organisation":"Jugendhaus","phone":"0711\/123456","mobil":"0170\/02010000","email":"bla@tipsntrips.de"}
+        //{"organisation":"Jugendhaus","phone":"0711\/123456","email":"bla@tipsntrips.de"}
             $('input#inputPhone').val(data.phone);
-            $('input#inputMobil').val(data.mobil);
             $('input#inputEmail').val(data.email);
             $('input#inputContact').val(data.contact);
         }, 'json');

@@ -1,9 +1,10 @@
 <?php
 try{
-    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $STH = $DBH->query('SELECT cu.id, cu.organisation, cu.street, cu.postcode, cu.city, cu.phone, cu.mobil, cu.email, strftime("%d.%m.%Y", cu.listed_since) AS since, co.name
+    $STH = $DBH->query('SELECT cu.id, cu.organisation, cu.street, cu.postcode, cu.city, cu.phone, cu.email, strftime("%d.%m.%Y", cu.listed_since) AS since, co.name
                             FROM customer AS cu
                             LEFT JOIN contributor AS co ON (cu.contributor_id = co.id)
                             ');
@@ -93,7 +94,6 @@ catch(PDOException $e) //Besonderheiten anzeigen
                     <th>Posteitzahl</th>
                     <th>Ort</th>
                     <th>Telefon</th>
-                    <th>Mobil</th>
                     <th>Email</th>
                     <th>gelistet seit</th>
                     <th>Stadtspiele</th>
@@ -112,7 +112,6 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$value['postcode'].'</td>';
         echo '<td>'.$value['city'].'</td>';
         echo '<td>'.$value['phone'].'</td>';
-        echo '<td>'.$value['mobil'].'</td>';
         echo '<td>'.$value['email'].'</td>';
         echo '<td>'.$value['since'].'</td>';
         echo '<td>'.$value[''].'</td>';

@@ -1,11 +1,8 @@
 <?php
 
-
 try{
-    $db_name = 'nocoldcalls.sqlite';
-
-// open the database - if database exists, then opens the existing one, else opens a new one.
-	
+    mkdir('../data/', 0755);
+    $db_name = '../data/nocoldcalls.sqlite';
     $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);	
     echo "Database - $db_name<br /><br />";
@@ -19,7 +16,6 @@ try{
             postcode INTEGER,
             city TEXT,
             phone TEXT,
-            mobil TEXT,
             email TEXT,
             listed_since NUMERIC,
             contributor_id INTEGER
@@ -36,7 +32,6 @@ try{
             datetime NUMERIC,
             contact TEXT,
             phone TEXT,
-            mobil TEXT,
             email TEXT,
             number INTEGER,
             comment TEXT,

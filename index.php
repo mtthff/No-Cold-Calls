@@ -1,6 +1,7 @@
 <?php
 try{
-    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     $STH = $DBH->query('SELECT a.id,
@@ -9,9 +10,7 @@ try{
                             cu.organisation,
                             a.contact,
                             a.phone AS appoint_phone,
-                            a.mobil AS appoint_mobil,
                             cu.phone AS custom_phone,
-                            cu.mobil AS custom_mobil,
                             a.number,
                             a.comment,
                             a.type_id,
@@ -38,7 +37,7 @@ try{
 }
 catch(PDOException $e) //Besonderheiten anzeigen
 {
-	print 'Exception : '.$e->getMessage();
+    print 'Exception : '.$e->getMessage();
 }
 
 ?>
@@ -130,7 +129,6 @@ catch(PDOException $e) //Besonderheiten anzeigen
     foreach ($app as $value) {
         
         if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
-        if (!$phone = $value['appoint_mobil']) $phone = $value['custom_mobil'];
         
         if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
         if ($value['fotocd']) $fotoCD = '<i class="icon-ok">'; 

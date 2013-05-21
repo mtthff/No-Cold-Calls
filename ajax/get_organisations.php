@@ -15,7 +15,8 @@
 
 
 try{
-    $DBH = new PDO("sqlite:../nocoldcalls.sqlite");
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact

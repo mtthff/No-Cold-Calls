@@ -1,6 +1,7 @@
 <?php
 //try{
-//    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+//    $db_name = 'data/nocoldcalls.sqlite';
+//    $DBH = new PDO("sqlite:$db_name");
 //    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 //
 //    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
@@ -119,18 +120,11 @@
                   <input type="text" name="phone" class="input-medium" id="inputPhone" placeholder="Phone">
                 </div>
               </div>
-                  
-              <div class="control-group">
-                <label class="control-label" for="inputMobil">Mobil</label>
-                <div class="controls">
-                  <input type="text" name="mobil" class="input-medium" id="inputMobil" placeholder="Mobil">
-                </div>
-              </div>
-                  
+                                   
               <div class="control-group">
                 <label class="control-label" for="inputEmail">Email</label>
                 <div class="controls">
-                  <input type="email" name="email" class="input-medium" id="inputEmail" placeholder="Mobil">
+                  <input type="email" name="email" class="input-medium" id="inputEmail" placeholder="Email">
                 </div>
               </div>
               <button type="submit" class="btn">Speichern</button>

@@ -1,7 +1,8 @@
 <?php
 //echo $_GET['appointment_id'];
 try{
-    $DBH = new PDO("sqlite:nocoldcalls.sqlite");
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     $STH = $DBH->query('SELECT 
@@ -10,10 +11,8 @@ try{
                             cu.organisation,
                             ap.contact,
                             ap.phone AS appoint_phone,
-                            ap.mobil AS appoint_mobil,
                             ap.email AS appoint_email,
                             cu.phone AS custom_phone,
-                            cu.mobil AS custom_mobil,
                             cu.email AS custom_email,
                             ap.number,
                             ap.comment,
@@ -42,9 +41,7 @@ try{
     [organisation] => Kinderhaus
     [contact] => Fr. Lockum
     [appoint_phone] => 
-    [appoint_mobil] => 
     [custom_phone] => 0711/654321
-    [custom_mobil] => 0170/2233222
     [number] => 33
     [comment] => -
     [type_id] => 1
@@ -166,12 +163,6 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputPhone">Telefon</label>
                 <div class="controls">
                   <input type="text" name="phone" class="input-large" id="inputPhone" placeholder="Telefon" value="<?php echo $row['custom_phone']//::TODO:: ?>">
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label" for="inputMobil">Mobil</label>
-                <div class="controls">
-                  <input type="text" name="mobil" class="input-large" id="inputMobil" placeholder="Mobil" value="<?php echo $row['custom_mobil']// ::TODO:: ?>">
                 </div>
               </div>
               <div class="control-group">

@@ -1,37 +1,50 @@
 CREATE TABLE appointment (
             id INTEGER PRIMARY KEY,
+            status_id INTEGER,
             customer_id INTEGER,
-            datetime DATETIME,
-            contact VARCHAR(255),
-            phone VARCHAR(255),
-            mobil VARCHAR(255),
-            email VARCHAR(255),
-            number INT(24) NULL,
+            datetime NUMERIC,
+            contact TEXT,
+            phone TEXT,
+            email TEXT,
+            number INTEGER,
             comment TEXT,
             contributor_id INTEGER,
-            listed_date DATE,
-            type_id INT(255),
-            specialized_value TEXT);
+            listed_date NUMERIC,
+            type_id INTEGER,
+            age TEXT,
+            tarif_id INTEGER,
+            juhe NUMERIC,
+            version_id INTEGER,
+            fotocd NUMERIC
+            );
+CREATE TABLE appointment_status (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
+CREATE TABLE appointment_tarif (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
+CREATE TABLE appointment_type (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
+CREATE TABLE appointment_version (
+          id INTEGER PRIMARY KEY,
+          label TEXT
+          );
 CREATE TABLE contributor (
           id INTEGER PRIMARY KEY,
-          name VARCHAR(255));
+          name TEXT
+          );
 CREATE TABLE customer (
             id INTEGER PRIMARY KEY,
-            organisation VARCHAR(255),
-            street VARCHAR(255),
-            postcode INT(5),
-            city VARCHAR(255),
-            phone VARCHAR(255),
-            mobil VARCHAR(255),
-            email VARCHAR(255),
-            listed_since DATE,
+            organisation TEXT,
+            street TEXT,
+            postcode INTEGER,
+            city TEXT,
+            phone TEXT,
+            email TEXT,
+            listed_since NUMERIC,
             contributor_id INTEGER
-            );
-CREATE TABLE specialized (
-          id INTEGER PRIMARY KEY,
-          name VARCHAR(255),
-          type_id INTEGER,
-          status BOOLEAN);
-CREATE TABLE type (
-          id INTEGER PRIMARY KEY,
-          name VARCHAR(255));
+        );

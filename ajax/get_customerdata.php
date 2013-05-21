@@ -13,10 +13,11 @@
 
 
 try{
-    $DBH = new PDO("sqlite:../nocoldcalls.sqlite");
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $STH = $DBH->query('SELECT organisation, phone, mobil, email
+    $STH = $DBH->query('SELECT organisation, phone, email
                             FROM customer
                             WHERE id = '.$_POST['customer_id']);
 
