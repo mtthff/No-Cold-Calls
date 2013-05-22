@@ -29,17 +29,19 @@ try{
     $stmt->bindParam(':version_id', $version_id);
     $stmt->bindParam(':fotocd ', $fotocd);
     
-    $data = array(  'status_id' => '1', 'customer_id' => '1', 'datetime' => '2013-09-12 10:15:00','contact' => 'Fr. Schäfer','phone' => '0171/ 1425132','email' => '','number' => '31','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-07','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '1');
+    $today = date('Y-m-d');
+    echo $today;
+    $data = array(  'status_id' => '2', 'customer_id' => '1', 'datetime' => $today.' 10:15:00', 'contact' => 'Fr. Schäfer','phone' => '0171/ 1425132','email' => '','number' => '31','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-07','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '1');
     $stmt->execute($data);
     $data = array(  'status_id' => '1', 'customer_id' => '2', 'datetime' => '2013-09-18 10:15:00','contact' => 'Fr. Lockum','phone' => '0175/ 6155552', 'email' => '','number' => '33','comment' => '-','contributor_id' => '2','listed_date' => '2013-05-06','type_id' => '1','age' => '8. Klasse','tarif_id' => '2','juhe' => '1','version_id' => '2','fotocd' => '1');
     $stmt->execute($data);
-    $data = array(  'status_id' => '1', 'customer_id' => '3', 'datetime' => '2013-08-12 10:15:00','contact' => 'Fr. Eberhard','phone' => '', 'email' => '','number' => '24','comment' => '-','contributor_id' => '3','listed_date' => '2013-03-07','type_id' => '1','age' => '5. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '');
+    $data = array(  'status_id' => '2', 'customer_id' => '3', 'datetime' => '2013-08-12 10:15:00','contact' => 'Fr. Eberhard','phone' => '', 'email' => '','number' => '24','comment' => '-','contributor_id' => '3','listed_date' => '2013-03-07','type_id' => '1','age' => '5. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '');
     $stmt->execute($data);
-    $data = array(  'status_id' => '1', 'customer_id' => '4', 'datetime' => '2013-10-01 15:00:00','contact' => 'Fr. Bart','phone' => '0168/ 2152344', 'email' => '','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-17','type_id' => '1','age' => '17-19 Jahre','tarif_id' => '2','juhe' => '1','version_id' => '1','fotocd' => '1');
+    $data = array(  'status_id' => '2', 'customer_id' => '4', 'datetime' => '2013-04-01 15:00:00','contact' => 'Fr. Bart','phone' => '0168/ 2152344', 'email' => '','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-17','type_id' => '1','age' => '17-19 Jahre','tarif_id' => '2','juhe' => '1','version_id' => '1','fotocd' => '1');
     $stmt->execute($data);
-    $data = array(  'status_id' => '1', 'customer_id' => '2', 'datetime' => '2013-11-03 10:15:00','contact' => 'Fr. Olluzr','phone' => '0160/ 616251' ,'email' => 'olluzzer@sjfhsd.de','number' => '18','comment' => '-','contributor_id' => '2','listed_date' => '2013-02-10','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '3','fotocd' => '1');
+    $data = array(  'status_id' => '3', 'customer_id' => '2', 'datetime' => '2013-11-03 10:15:00','contact' => 'Fr. Olluzr','phone' => '0160/ 616251' ,'email' => 'olluzzer@sjfhsd.de','number' => '18','comment' => '-','contributor_id' => '2','listed_date' => '2013-02-10','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '3','fotocd' => '1');
     $stmt->execute($data);
-    $data = array(  'status_id' => '1','customer_id' => '1', 'datetime' => '2013-08-20 10:15:00','contact' => 'Hr. Meier','phone' => '', 'email' => 'privat@hagdssd.de','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-04-17','type_id' => '1','age' => '12-14 Jahre','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '');
+    $data = array(  'status_id' => '2','customer_id' => '1', 'datetime' => '2013-08-20 10:15:00','contact' => 'Hr. Meier','phone' => '', 'email' => 'privat@hagdssd.de','number' => '12','comment' => '-','contributor_id' => '1','listed_date' => '2013-04-17','type_id' => '1','age' => '12-14 Jahre','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '');
     $stmt->execute($data);
 
 

@@ -7,6 +7,7 @@ try{
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     $STH = $DBH->query('SELECT a.id,
+                            status_id,
                             strftime("%d.%m.%Y", a.datetime) AS day,
                             strftime("%H:%M", a.datetime) AS time,
                             cu.organisation,
@@ -134,8 +135,15 @@ catch(PDOException $e) //Besonderheiten anzeigen
         
         if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
         if ($value['fotocd']) $fotoCD = '<i class="icon-ok">'; 
+        if ($value['status_id'] == 1) $statusClass = "info";
+        elseif ($value['status_id'] == 2) $statusClass = "";
+        else $statusClass = "error";
         
-        echo '<tr id="'.$value['id'].'">';
+        $timestamp = mktime(10,15,0, substr($value['day'],3,2), substr($value['day'], 0, 2), substr($value['day'], 6, 4));
+        if ($timestamp < mktime()) $statusClass = 'runout'; 
+        if ($value['day'] == date('d.m.Y')) $statusClass = 'success'; 
+        
+        echo '<tr id="'.$value['id'].'" class="'.$statusClass.'">';
         echo '<td>'.$value['day'].'</td>';
         echo '<td>'.$value['time'].'</td>';
         echo '<td>'.$value['organisation'].'</td>';
@@ -156,6 +164,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         
         $juhe = NULL;
         $fotoCD = NULL;
+        $statusClass = NULL;
 }
 ?>
                 
@@ -167,7 +176,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
       <hr>
 
       <footer>
-        <p>Stand: 30.04.2013</p>
+        <p>Stand: <?php echo date("d.m.Y") ?></p>
       </footer>
 
     </div> <!-- /container -->

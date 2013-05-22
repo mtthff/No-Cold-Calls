@@ -1,13 +1,12 @@
 <?php
 session_start();
-//echo $_GET['appointment_id'];
+
 try{
     $db_name = 'data/nocoldcalls.sqlite';
     $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     if ($_GET['customer_id']){
-        
            $STH = $DBH->query('SELECT organisation AS customer, phone AS custom_phone, email as custom_email
                             FROM customer
                             WHERE id = '.$_GET['customer_id']);
@@ -15,6 +14,7 @@ try{
     else
     {
         $STH = $DBH->query('SELECT 
+                                ap.status_id,
                                 strftime("%d.%m.%Y", ap.datetime) AS datum,
                                 strftime("%H:%M", ap.datetime) AS time,
                                 cu.organisation AS customer,
@@ -30,6 +30,7 @@ try{
                                 ap.tarif_id,
                                 ap.juhe,
                                 ap.version_id,
+                                ap.contributor_id,
                                 co.name,
                                 strftime("%d.%m.%Y", ap.listed_date) AS listed_date
                             FROM appointment AS ap
@@ -158,7 +159,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
             <span class="icon-bar"></span>
           </button>
 
-          <a class="brand" href="index.html">No Cold Call</a>
+          <a class="brand" href="index.php">No Cold Call</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="index.php">Übersicht</a></li>
@@ -177,7 +178,14 @@ catch(PDOException $e) //Besonderheiten anzeigen
         <!-- Example row of columns -->
       <div class="row">
           <div class="span12">
-            <h3>Neuer Termin</h3>
+              <?php
+              if (!$_GET['appointment_id']){
+                  echo "<h3>Neuer Termin</h3>";                  
+              }
+              else{
+                  echo '<h3>Termin<small> eingetragen durch '.$_SESSION['name'].' am '.$_SESSION['listed_date'].'</small></h3>';
+              }
+              ?>
           </div>
           <form class="form-horizontal" action="save_appointment.php" method="post">
               <input type="hidden" name="contributor_id" value="1">
@@ -243,17 +251,19 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputJuHe">Jugendherberge</label>
                 <div class="controls">
-                  <input type="checkbox" name="juhe" id="inputJuHe" value="true">
+                    <input type="checkbox" name="juhe" id="inputJuHe" value="true"<?php if($_SESSION['juhe'] == TRUE) echo ' checked';?>>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputTarif">Tarif</label>
                 <div class="controls">
-                    <input type="hidden" name="tarif_id" id="tarif_id" value="" />
+                    <input type="hidden" name="tarif_id" id="tarif_id" value="<?php echo $_SESSION['tarif_id'] ?>" />
                     <div class="btn-group tarif_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($appointment_tarif as $value) {
-                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                            if($value['id'] == $_SESSION['tarif_id']) $tarifClass = "btn active";
+                            else $tarifClass = "btn";
+                            echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['label'].'</button>';
                         }
                         ?>
                     </div>
@@ -266,7 +276,9 @@ catch(PDOException $e) //Besonderheiten anzeigen
                     <div class="btn-group version_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($appointment_version as $value) {
-                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                            if($value['id'] == $_SESSION['version_id']) $tarifClass = "btn active";
+                            else $tarifClass = "btn";
+                            echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['label'].'</button>';
                         }
                         ?>
                     </div>
@@ -296,7 +308,9 @@ catch(PDOException $e) //Besonderheiten anzeigen
                     <div class="btn-group status_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($appointment_status as $value) {
-                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                            if($value['id'] == $_SESSION['status_id']) $tarifClass = "btn active";
+                            else $tarifClass = "btn";
+                            echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['label'].'</button>';
                         }
                         ?>
                     </div>

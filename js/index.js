@@ -11,4 +11,6 @@ $( document ).ready(function() {
     $('i.icon-trash').click(function(){
         confirm("Soll Datensatz id="+$(this).parent().parent().attr('id')+" tatsächlich gelöscht werden?");
     });
+    
+    $('tr.runout').css('opacity', .3);
 });
