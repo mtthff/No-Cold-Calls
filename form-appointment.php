@@ -45,12 +45,39 @@ try{
             $_SESSION[$key] = $value;
         }
     }
+    unset($row);
     
+    // STATUS Optionen einlesen
     $STH = $DBH->query('SELECT id, label FROM appointment_status');
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     while($row = $STH->fetch()){
         $appointment_status[]= $row;
     }
+    unset($row);
+    
+    // TARIF Optionen einlesen
+    $STH = $DBH->query('SELECT id, label FROM appointment_tarif');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $appointment_tarif[]= $row;
+    }
+    unset($row);
+    
+    // TYPE Optionen einlesen
+    $STH = $DBH->query('SELECT id, label FROM appointment_type');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $appointment_type[]= $row;
+    }
+    unset($row);
+    
+    // VERSION Optionen einlesen
+    $STH = $DBH->query('SELECT id, label FROM appointment_version');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $appointment_version[]= $row;
+    }
+    unset($row);
     
     
 //    echo "<pre>";
@@ -222,24 +249,27 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputTarif">Tarif</label>
                 <div class="controls">
-                    <select name="tarif_id">
-                      <option selected value="1">Klassik Ö - 1 €</option>
-                      <option value="2">Premium Ö - 2 €</option>
-                      <option value="3">Klassik P - 3 €</option>
-                      <option value="4">Premium P - 6 €</option>
-                    </select>
+                    <input type="hidden" name="tarif_id" id="tarif_id" value="" />
+                    <div class="btn-group tarif_id" data-toggle="buttons-radio">
+                        <?php
+                        foreach ($appointment_tarif as $value) {
+                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                        }
+                        ?>
+                    </div>
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label" for="inputVersion">Version</label>
                 <div class="controls">
-                    <select name="version_id">
-                      <option selected value="1">deutsch</option>
-                      <option value="2">englisch</option>
-                      <option value="3">französisch</option>
-                      <option value="4">polnisch</option>
-                      <option value="5">russisch</option>
-                    </select>
+                    <input type="hidden" name="version_id" id="version_id" value="" />
+                    <div class="btn-group version_id" data-toggle="buttons-radio">
+                        <?php
+                        foreach ($appointment_version as $value) {
+                            echo '<button type="button" value="'.$value['id'].'" class="btn">'.$value['label'].'</button>';
+                        }
+                        ?>
+                    </div>
                 </div>
               </div>
               <div class="control-group">
@@ -288,7 +318,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         <p>Stand: 30.04.2013</p>
       </footer>
 
-    </div> <!-- /container -->
+    <!--</div>  /container -->
 
     <!-- Le javascript
     ================================================== -->

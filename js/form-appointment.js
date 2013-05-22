@@ -12,7 +12,6 @@ $( document ).ready(function() {
             });
 
         });
-
     
     $('.timepicker').timepicker({
         showMeridian: false,
@@ -20,9 +19,21 @@ $( document ).ready(function() {
         defaultTime: '10:15 AM'
     });
     
+    // Checkbutton JuHe
     $('#inputJuHe').change(function(){
         if($(this).is(':checked')){
-            $("select[name=tarif]").val('2').attr('selected',true);
+            $('.tarif_id .btn').each(function(){
+                $(this).removeClass('active');
+            });
+            $('.tarif_id .btn[value="2"]').addClass('active');
+            $('.tarif_id .btn[value="1"], .tarif_id .btn[value="3"]').addClass('disabled').prop('disabled', true);
+            $('input[name=fotocd]').prop('checked',true).parent().addClass("hidden").parent().append('<div class="controls" id="fotocdreadonly"><i class="icon-ok"></i></div>');
+        }
+        else{
+            $('.tarif_id .btn[value="2"]').removeClass('active');
+            $('.tarif_id .btn[value="1"], .tarif_id .btn[value="3"]').removeClass('disabled').removeAttr('disabled');
+            $('input[name=fotocd]').prop('checked',false).parent().removeClass("hidden")
+            $('#fotocdreadonly').remove();
         }
     });
  
@@ -31,19 +42,22 @@ $( document ).ready(function() {
         if(tarif == 2 || tarif == 4){
             $('input[name=fotocd]').prop('checked',true).parent().addClass("hidden").parent().append('<div class="controls" id="fotocdreadonly"><i class="icon-ok"></i></div>');
 
-        }else{
+        }
+        else{
             $('input[name=fotocd]').prop('checked',false).parent().removeClass("hidden");
             $('#fotocdreadonly').remove();
             
         }
     });
 
-    //Value des geklickten staus_id-buttonin hidden variable schreiben
-    $(".status_id .btn").click(function() {
-        // whenever a button is clicked, set the hidden helper
+    //Value des geklickten staus_id/tarif_id/version_id-button in hidden variable schreiben
+    $(".status_id .btn, .version_id .btn, .tarif_id .btn").click(function() {
         $("#status_id").val($(this).val());
+        $(this).parent().siblings('input:hidden').val($(this).val());
     })
 
+
+    // Autovervollständigung des Customer (ajax)
     $('input#inputCustomer').autocomplete({
         source: 'ajax/get_organisations.php',
         minLength: 2,
