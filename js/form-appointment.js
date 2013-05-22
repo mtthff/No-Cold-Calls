@@ -66,7 +66,9 @@ $( document ).ready(function() {
             customer_id: ui.item.id,
             text: ui.item.value
         }, function(data){
+            alert(data.id);
         //{"organisation":"Jugendhaus","phone":"0711\/123456","email":"bla@tipsntrips.de"}
+            $('input#customer_id').val(data.id);
             $('input#inputPhone').val(data.phone);
             $('input#inputEmail').val(data.email);
             $('input#inputContact').val(data.contact);

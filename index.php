@@ -32,9 +32,9 @@ try{
     while($row = $STH->fetch()){
         $app[]= $row;
     }
-//    echo "<pre>";
-//    print_r($app);
-//    exit;
+    echo "<pre>";
+    print_r($app);
+    exit;
     
     
 }
@@ -134,7 +134,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
         
         if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
-        if ($value['fotocd']) $fotoCD = '<i class="icon-ok">'; 
+        if ($value['fotocd'] == 'true') $fotoCD = '<i class="icon-ok">'; 
         if ($value['status_id'] == 1) $statusClass = "info";
         elseif ($value['status_id'] == 2) $statusClass = "";
         else $statusClass = "error";

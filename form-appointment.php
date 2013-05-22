@@ -18,6 +18,7 @@ try{
                                 strftime("%d.%m.%Y", ap.datetime) AS datum,
                                 strftime("%H:%M", ap.datetime) AS time,
                                 cu.organisation AS customer,
+                                cu.id AS customer_id,
                                 ap.contact,
                                 ap.phone AS appoint_phone,
                                 ap.email AS appoint_email,
@@ -188,7 +189,10 @@ catch(PDOException $e) //Besonderheiten anzeigen
               ?>
           </div>
           <form class="form-horizontal" action="save_appointment.php" method="post">
+              <input type="hidden" name="appointment_id" value="<?php echo $_GET['appointment_id'] ?>">
               <input type="hidden" name="contributor_id" value="1">
+              <input type="hidden" name="type_id" value="1">
+              <input type="hidden" name="listed_date" value="<?php echo date('Y-m-d')?>">
               <div class="span5">
 
               <div class="control-group">
@@ -211,6 +215,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="inputCustomer">Einrichtung/Schule</label>
                 <div class="controls">
                     <div class="input-append">
+                        <input type="hidden" name="customer_id" id="customer_id" value="<?php echo $_SESSION['customer_id'] ?>">
                         <input type="text" name="customer" id="inputCustomer" class="input-large" placeholder="Schule" value="<?php echo $_SESSION['customer'] ?>" required>
                         <span class="add-on"><a href="form-customer.php?ref=newAppointment"><i class="icon-plus"></i></a></span>
                     </div>

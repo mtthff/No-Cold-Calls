@@ -30,8 +30,7 @@ try{
     $stmt->bindParam(':fotocd ', $fotocd);
     
     $today = date('Y-m-d');
-    echo $today;
-    $data = array(  'status_id' => '2', 'customer_id' => '1', 'datetime' => $today.' 10:15:00', 'contact' => 'Fr. Schäfer','phone' => '0171/ 1425132','email' => '','number' => '31','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-07','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '1');
+    $data = array( 'status_id' => '2', 'customer_id' => '1', 'datetime' => $today.' 10:15:00', 'contact' => 'Fr. Schäfer','phone' => '0171/ 1425132','email' => '','number' => '31','comment' => '-','contributor_id' => '1','listed_date' => '2013-05-07','type_id' => '1','age' => '10. Klasse','tarif_id' => '1','juhe' => '','version_id' => '1','fotocd' => '1');
     $stmt->execute($data);
     $data = array(  'status_id' => '1', 'customer_id' => '2', 'datetime' => '2013-09-18 10:15:00','contact' => 'Fr. Lockum','phone' => '0175/ 6155552', 'email' => '','number' => '33','comment' => '-','contributor_id' => '2','listed_date' => '2013-05-06','type_id' => '1','age' => '8. Klasse','tarif_id' => '2','juhe' => '1','version_id' => '2','fotocd' => '1');
     $stmt->execute($data);

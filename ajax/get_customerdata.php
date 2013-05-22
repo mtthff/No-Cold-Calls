@@ -26,6 +26,7 @@ try{
     
     $contact = explode(" - ", $_POST['text']);
     $row['contact'] = $contact[1];
+    $row['id'] = $_POST['customer_id'];
     
     echo json_encode($row);
 
