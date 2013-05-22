@@ -62,11 +62,10 @@
     unset($_POST['customer']);
     if($_POST['appointment_id'] == '') unset($_POST['appointment_id']);
         
-    echo '<pre>Post:<br />';
-    print_r($_POST);
-//    print_r($stmt);
-//  exit;
+//echo '<pre>Post:<br />';
+//print_r($_POST);
+//exit;
         
-$stmt->execute($_POST);
+    $stmt->execute($_POST);
+    header("Location: index.php");
 ?>
-<a href="index.php">zur Startseite</a>

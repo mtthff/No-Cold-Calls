@@ -51,7 +51,7 @@ $( document ).ready(function() {
     });
 
     //Value des geklickten staus_id/tarif_id/version_id-button in hidden variable schreiben
-    $(".status_id .btn, .version_id .btn, .tarif_id .btn").click(function() {
+    $(".status_id .btn, .version_id .btn, .tarif_id .btn, .contributor_id .btn").click(function() {
         $("#status_id").val($(this).val());
         $(this).parent().siblings('input:hidden').val($(this).val());
     })

@@ -18,23 +18,26 @@ try{
                             a.comment,
                             a.type_id,
                             a.age,
-                            a.tarif_id,
+                            at.label AS labeltarif,
                             a.juhe,
-                            a.version_id,
+                            av.label AS labelversion,
+                            a.fotocd,
                             co.name,
                             strftime("%d.%m.%Y", a.listed_date) AS listed_date
                         FROM appointment AS a
                         LEFT JOIN customer AS cu ON (a.customer_id = cu.id)
                         LEFT JOIN contributor AS co ON (a.contributor_id = co.id)
+                        LEFT JOIN appointment_version AS av ON (a.version_id = av.id)
+                        LEFT JOIN appointment_tarif AS at ON (a.tarif_id = at.id)
                         ORDER BY a.datetime ASC');
 
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     while($row = $STH->fetch()){
         $app[]= $row;
     }
-    echo "<pre>";
-    print_r($app);
-    exit;
+//    echo "<pre>";
+//    print_r($app);
+//    exit;
     
     
 }
@@ -134,7 +137,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
         
         if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
-        if ($value['fotocd'] == 'true') $fotoCD = '<i class="icon-ok">'; 
+        if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-ok">'; 
         if ($value['status_id'] == 1) $statusClass = "info";
         elseif ($value['status_id'] == 2) $statusClass = "";
         else $statusClass = "error";
@@ -151,12 +154,12 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$phone.'</td>';
         echo '<td>'.$value['age'].'</td>';
         echo '<td>'.$value['number'].'</td>';
-        echo '<td>'.$value['tarif_id'].'</td>';
+        echo '<td>'.substr($value['labeltarif'], 0,4).substr($value['labeltarif'], -3).'</td>';
         echo '<td>'.$juhe.'</td>';
-        echo '<td>'.$value['version_id'].'</td>';
+        echo '<td>'.$value['labelversion'].'</td>';
         echo '<td>'.$fotoCD.'</td>';
         echo '<td>'.$value['comment'].'</td>';
-        echo '<td>'.$value['label'].'</td>';
+        echo '<td>'.$value['name'].'</td>';
         echo '<td>'.$value['listed_date'].'</td>';
         echo '<td><i id="edit" class="icon-pencil"></i></td>';
         echo '<td><i class="icon-trash"></i></td>';                    

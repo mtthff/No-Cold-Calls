@@ -76,7 +76,7 @@ try{
 
     /*------------------------------------------------*/    
     $DBH->exec("DELETE FROM appointment_version");
-    $DBH->exec("INSERT INTO appointment_version (label) VALUES ('deutsch');
+    $DBH->exec("INSERT INTO appointment_version (label) VALUES ('Deutsch');
                 INSERT INTO appointment_version (label) VALUES ('Englisch');
                 INSERT INTO appointment_version (label) VALUES ('Französisch');
                 INSERT INTO appointment_version (label) VALUES ('Polnisch');

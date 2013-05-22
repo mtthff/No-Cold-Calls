@@ -31,6 +31,7 @@ try{
                                 ap.tarif_id,
                                 ap.juhe,
                                 ap.version_id,
+                                ap.fotocd,
                                 ap.contributor_id,
                                 co.name,
                                 strftime("%d.%m.%Y", ap.listed_date) AS listed_date
@@ -78,6 +79,14 @@ try{
     $STH->setFetchMode(PDO::FETCH_ASSOC);
     while($row = $STH->fetch()){
         $appointment_version[]= $row;
+    }
+    unset($row);
+    
+    // Contributoren einlesen
+    $STH = $DBH->query('SELECT id, name FROM contributor');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $contributor[]= $row;
     }
     unset($row);
     
@@ -190,7 +199,6 @@ catch(PDOException $e) //Besonderheiten anzeigen
           </div>
           <form class="form-horizontal" action="save_appointment.php" method="post">
               <input type="hidden" name="appointment_id" value="<?php echo $_GET['appointment_id'] ?>">
-              <input type="hidden" name="contributor_id" value="1">
               <input type="hidden" name="type_id" value="1">
               <input type="hidden" name="listed_date" value="<?php echo date('Y-m-d')?>">
               <div class="span5">
@@ -256,7 +264,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputJuHe">Jugendherberge</label>
                 <div class="controls">
-                    <input type="checkbox" name="juhe" id="inputJuHe" value="true"<?php if($_SESSION['juhe'] == TRUE) echo ' checked';?>>
+                    <input type="checkbox" name="juhe" id="inputJuHe" value="1"<?php if($_SESSION['juhe'] == '1') echo ' checked';?>>
                 </div>
               </div>
               <div class="control-group">
@@ -277,7 +285,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputVersion">Version</label>
                 <div class="controls">
-                    <input type="hidden" name="version_id" id="version_id" value="" />
+                    <input type="hidden" name="version_id" id="version_id" value="<?php echo $_SESSION['version_id'] ?>" />
                     <div class="btn-group version_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($appointment_version as $value) {
@@ -292,7 +300,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
               <div class="control-group">
                 <label class="control-label" for="inputFotoCD">Foto-CD</label>
                 <div class="controls">
-                  <input type="checkbox" name="fotocd" id="inputFotoCD" value="true">
+                  <input type="checkbox" name="fotocd" id="inputFotoCD" value="1"<?php if($_SESSION['fotocd'] == '1') echo ' checked';?>>
                 </div>
               </div>
 
@@ -307,15 +315,31 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 </div>
               </div>
               <div class="control-group">
-                <label class="control-label" for="status">Status</label>
+                <label class="control-label" for="status_id">Status</label>
                 <div class="controls">
-                    <input type="hidden" name="status_id" id="status_id" value="" />
+                    <input type="hidden" name="status_id" id="status_id" value="<?php echo $_SESSION['status_id'] ?>" />
                     <div class="btn-group status_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($appointment_status as $value) {
                             if($value['id'] == $_SESSION['status_id']) $tarifClass = "btn active";
                             else $tarifClass = "btn";
                             echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['label'].'</button>';
+                        }
+                        ?>
+                    </div>
+                </div>
+              </div>
+            
+              <div class="control-group">
+                <label class="control-label" for="contributor_id">Bearbeitet von</label>
+                <div class="controls">
+                    <input type="hidden" name="contributor_id" id="contributor_id" value="<?php echo $_SESSION['contributor_id'] ?>" />
+                    <div class="btn-group status_id" data-toggle="buttons-radio">
+                        <?php
+                        foreach ($contributor as $value) {
+                            if($value['id'] == $_SESSION['contributor_id']) $tarifClass = "btn active";
+                            else $tarifClass = "btn";
+                            echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['name'].'</button>';
                         }
                         ?>
                     </div>
