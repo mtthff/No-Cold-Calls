@@ -13,4 +13,6 @@ $( document ).ready(function() {
     });
     
     $('tr.runout').css('opacity', .3);
+    
+    $('.tooltip-icons').tooltip();
 });

@@ -127,6 +127,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                     <th>eingetragen am</th>
                     <th></th>
                     <th></th>                    
+                    <th></th>                    
                 </tr>
             </thead>
             <tbody style="font-size:.9em">
@@ -137,7 +138,9 @@ catch(PDOException $e) //Besonderheiten anzeigen
         if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
         
         if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
-        if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-ok">'; 
+        if ($value['juhe']) $juhe = '<i class="icon-check">'; 
+//        if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-ok">'; 
+        if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-check">'; 
         if ($value['status_id'] == 1) $statusClass = "info";
         elseif ($value['status_id'] == 2) $statusClass = "";
         else $statusClass = "error";
@@ -150,7 +153,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$value['day'].'</td>';
         echo '<td>'.$value['time'].'</td>';
         echo '<td>'.$value['organisation'].'</td>';
-        echo '<td>'.$value['contact'].'</td>';
+        echo '<td>'.substr($value['contact'], 0, 10).'...</td>';
         echo '<td>'.$phone.'</td>';
         echo '<td>'.$value['age'].'</td>';
         echo '<td>'.$value['number'].'</td>';
@@ -161,8 +164,9 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$value['comment'].'</td>';
         echo '<td>'.$value['name'].'</td>';
         echo '<td>'.$value['listed_date'].'</td>';
-        echo '<td><i id="edit" class="icon-pencil"></i></td>';
-        echo '<td><i class="icon-trash"></i></td>';                    
+        echo '<td><a href="#" class="tooltip-icons" data-placement="bottom" data-original-title="Buchung editieren"><i id="edit" class="icon-pencil"></i></a></td>';
+        echo '<td><a href="#" class="tooltip-icons" data-placement="bottom" data-original-title="Buchung löschen"><i class="icon-trash"></i></a></td>';                    
+        echo '<td><a href="#" class="tooltip-icons" data-placement="right" data-original-title="Buchung klonen"><i class="icon-share"></i></a></td>';                    
         echo '</tr>';
         
         $juhe = NULL;
@@ -180,6 +184,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
       <footer>
         <p>Stand: <?php echo date("d.m.Y") ?></p>
+        <span class="label label-success">aktuell</span> <span class="label label-info">angefragt</span> <span class="label label-important">abgesagt</span>
       </footer>
 
     </div> <!-- /container -->
@@ -188,8 +193,9 @@ catch(PDOException $e) //Besonderheiten anzeigen
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="js/jquery-2.0.0.min.js"></script>
-    <script src="js/jquery.tablesorter.min.js"></script>
+    <!--<script src="js/jquery.tablesorter.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
     <script src="js/index.js"></script>
 
   </body>

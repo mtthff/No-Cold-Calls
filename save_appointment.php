@@ -61,11 +61,12 @@
     unset($_POST['time']);
     unset($_POST['customer']);
     if($_POST['appointment_id'] == '') unset($_POST['appointment_id']);
-        
-//echo '<pre>Post:<br />';
-//print_r($_POST);
-//exit;
-        
+       
     $stmt->execute($_POST);
-    header("Location: index.php");
+
+    echo '<pre>Post:<br />';
+    print_r($_POST);
+//      header("Location: index.php");
 ?>
+<a href="index.php" class="btn">zur Übersicht</a>
+    
