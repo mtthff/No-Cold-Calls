@@ -52,7 +52,6 @@ $( document ).ready(function() {
 
     //Value des geklickten staus_id/tarif_id/version_id-button in hidden variable schreiben
     $(".status_id .btn, .version_id .btn, .tarif_id .btn, .contributor_id .btn").click(function() {
-        $("#status_id").val($(this).val());
         $(this).parent().siblings('input:hidden').val($(this).val());
     })
 
@@ -66,8 +65,6 @@ $( document ).ready(function() {
             customer_id: ui.item.id,
             text: ui.item.value
         }, function(data){
-            alert(data.id);
-        //{"organisation":"Jugendhaus","phone":"0711\/123456","email":"bla@tipsntrips.de"}
             $('input#customer_id').val(data.id);
             $('input#inputPhone').val(data.phone);
             $('input#inputEmail').val(data.email);

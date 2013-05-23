@@ -8,17 +8,14 @@
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if($_POST['appointment_id'] == ''){
-        $stmt = $DBH->prepare("INSERT INTO appointment (status_id, customer_id, datetime, contact, phone, email, number, comment, contributor_id, listed_date, type_id, age, tarif_id, juhe, version_id, fotocd) 
-                               VALUES (:status_id, :customer_id, :datetime, :contact, :phone, :email, :number, :comment, :contributor_id, :listed_date, :type_id, :age, :tarif_id, :juhe, :version_id, :fotocd);");
+        $stmt = $DBH->prepare("INSERT INTO appointment (status_id, customer_id, datetime, number, comment, contributor_id, listed_date, type_id, age, tarif_id, juhe, version_id, fotocd) 
+                               VALUES (:status_id, :customer_id, :datetime, :number, :comment, :contributor_id, :listed_date, :type_id, :age, :tarif_id, :juhe, :version_id, :fotocd);");
     }
     else{
         $stmt = $DBH->prepare("UPDATE appointment SET
                                 status_id = :status_id,
                                 customer_id = :customer_id,
                                 datetime = :datetime,
-                                contact = :contact,
-                                phone = :phone,
-                                email = :email,
                                 number = :number,
                                 comment = :comment,
                                 contributor_id = :contributor_id,
@@ -37,9 +34,6 @@
     $stmt->bindParam(':status_id', $status_id);
     $stmt->bindParam(':customer_id', $customer_id);
     $stmt->bindParam(':datetime', $datetime);
-    $stmt->bindParam(':contact', $contact);
-    $stmt->bindParam(':phone', $phone);
-    $stmt->bindParam(':email', $email);
     $stmt->bindParam(':number', $number);
     $stmt->bindParam(':comment', $comment);
     $stmt->bindParam(':contributor_id', $contributor_id);
@@ -60,9 +54,12 @@
     unset($_POST['minute']);
     unset($_POST['time']);
     unset($_POST['customer']);
+    unset($_POST['contact']);
+    unset($_POST['phone']);
+    unset($_POST['email']);
     if($_POST['appointment_id'] == '') unset($_POST['appointment_id']);
        
-    $stmt->execute($_POST);
+//    $s tmt->execute($_POST);
 
     echo '<pre>Post:<br />';
     print_r($_POST);

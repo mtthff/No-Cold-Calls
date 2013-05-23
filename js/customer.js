@@ -4,6 +4,21 @@ $( document ).ready(function() {
     });
     
     $('i.icon-trash').click(function(){
-        confirm("Soll Datensatz id=" + $(this).parent().parent().attr('id') + " tatsächlich gelöscht werden?");
+        var customer_id = $(this).parent().parent().attr('id');
+        var customer_name = $(this).parent().siblings('td.customerName').text();
+        $('input#del_id').val(customer_id);
+        $('#del_name').text(customer_name);
+        $('#deleteCustomer').modal();
     });
+    
+    $('#yesDeleteIt').click(function(){
+       $('#deleteCustomer').modal('hide');
+       var id = $('input#del_id').val();
+       $.post("ajax/del_customer.php",{
+            customer_id: id
+        }, function(){
+            window.location.href = 'customer.php';
+        });       
+    });
+    
 });

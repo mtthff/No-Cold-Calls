@@ -12,6 +12,7 @@ try{
         CREATE TABLE IF NOT EXISTS customer (
             id INTEGER PRIMARY KEY,
             organisation TEXT,
+            contact TEXT,
             street TEXT,
             postcode INTEGER,
             city TEXT,
@@ -30,9 +31,6 @@ try{
             status_id INTEGER,
             customer_id INTEGER,
             datetime NUMERIC,
-            contact TEXT,
-            phone TEXT,
-            email TEXT,
             number INTEGER,
             comment TEXT,
             contributor_id INTEGER,

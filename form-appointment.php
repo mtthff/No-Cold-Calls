@@ -7,7 +7,7 @@ try{
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
     if ($_GET['customer_id']){
-           $STH = $DBH->query('SELECT organisation AS customer, phone AS custom_phone, email as custom_email
+           $STH = $DBH->query('SELECT organisation, contact, phone, email
                             FROM customer
                             WHERE id = '.$_GET['customer_id']);
     }
@@ -19,11 +19,9 @@ try{
                                 strftime("%H:%M", ap.datetime) AS time,
                                 cu.organisation AS customer,
                                 cu.id AS customer_id,
-                                ap.contact,
-                                ap.phone AS appoint_phone,
-                                ap.email AS appoint_email,
-                                cu.phone AS custom_phone,
-                                cu.email AS custom_email,
+                                cu.contact,
+                                cu.phone,
+                                cu.email,
                                 ap.number,
                                 ap.comment,
                                 ap.type_id,
@@ -334,7 +332,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                 <label class="control-label" for="contributor_id">Bearbeitet von</label>
                 <div class="controls">
                     <input type="hidden" name="contributor_id" id="contributor_id" value="<?php echo $_SESSION['contributor_id'] ?>" />
-                    <div class="btn-group status_id" data-toggle="buttons-radio">
+                    <div class="btn-group contributor_id" data-toggle="buttons-radio">
                         <?php
                         foreach ($contributor as $value) {
                             if($value['id'] == $_SESSION['contributor_id']) $tarifClass = "btn active";
@@ -345,6 +343,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
                     </div>
                 </div>
               </div>
+            
               <div class="control-group">
                 <label class="control-label"></label>
                 <button type="submit" class="btn">Speichern</button>

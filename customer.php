@@ -4,7 +4,7 @@ try{
     $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $STH = $DBH->query('SELECT cu.id, cu.organisation, cu.street, cu.postcode, cu.city, cu.phone, cu.email, strftime("%d.%m.%Y", cu.listed_since) AS since, co.name
+    $STH = $DBH->query('SELECT cu.id, cu.organisation, cu. contact, cu.street, cu.postcode, cu.city, cu.phone, cu.email, strftime("%d.%m.%Y", cu.listed_since) AS since, co.name
                             FROM customer AS cu
                             LEFT JOIN contributor AS co ON (cu.contributor_id = co.id)
                             ');
@@ -90,6 +90,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
             <thead>
                 <tr>
                     <th>Einrichtung/Schule</th>
+                    <th>Leiter</th>
                     <th>Straße</th>
                     <th>Posteitzahl</th>
                     <th>Ort</th>
@@ -107,7 +108,8 @@ catch(PDOException $e) //Besonderheiten anzeigen
     foreach ($app as $value) {
         $spec = unserialize($value['specialized_value']);
         echo '<tr id="'.$value['id'].'">';
-        echo '<td>'.$value['organisation'].'</td>';
+        echo '<td class="customerName">'.$value['organisation'].'</td>';
+        echo '<td>'.$value['contact'].'</td>';
         echo '<td>'.$value['street'].'</td>';
         echo '<td>'.$value['postcode'].'</td>';
         echo '<td>'.$value['city'].'</td>';
@@ -133,6 +135,23 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
     </div> <!-- /container -->
 
+    
+    <!-- Modal -->
+    <div id="deleteCustomer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Kunde löschen</h3>
+      </div>
+      <div class="modal-body">
+          <p>Soll der Kunde <strong><span id="del_name"></span></strong> wirklich aus der Datenbank gelöscht werden?</p>
+          <input type="hidden" id="del_id" />
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Nein</button>
+        <button class="btn btn-primary" id="yesDeleteIt">Ja</button>
+      </div>
+    </div>
+    
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

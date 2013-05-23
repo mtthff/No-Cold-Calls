@@ -3,14 +3,21 @@
 ///no-cold-calls/form-customer.php
 
 
-//try{
-//    $db_name = 'data/nocoldcalls.sqlite';
-//    $DBH = new PDO("sqlite:$db_name");
-//    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
-//
-//    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
+try{
+    $db_name = 'data/nocoldcalls.sqlite';
+    $DBH = new PDO("sqlite:$db_name");
+    $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
+
+    // Contributoren einlesen
+    $STH = $DBH->query('SELECT id, name FROM contributor');
+    $STH->setFetchMode(PDO::FETCH_ASSOC);
+    while($row = $STH->fetch()){
+        $contributor[]= $row;
+    }
+    unset($row);
+
+//    $STH = $DBH->query('SELECT cu.id, cu.organisation, cu.contact
 //                            FROM customer as cu
-//                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
 //                            ORDER BY organisation ASC');
 //
 //    $STH->setFetchMode(PDO::FETCH_ASSOC);
@@ -20,13 +27,11 @@
 ////    echo "<pre>";
 ////    print_r($customer);
 ////    exit;
-//    
-//    
-//}
-//catch(PDOException $e) //Besonderheiten anzeigen
-//{
-//	print 'Exception : '.$e->getMessage();
-//}
+
+}
+catch(PDOException $e){ //Besonderheiten anzeigen
+	print 'Exception : '.$e->getMessage();
+}
 
 ?>
 
@@ -70,7 +75,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="brand" href="index.html">No Cold Calls</a>
+          <a class="brand" href="index.php">No Cold Calls</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active"><a href="index.php">Übersicht</a></li>
@@ -105,6 +110,13 @@
               </div>
                   
               <div class="control-group">
+                <label class="control-label" for="inputContact">Leiter</label>
+                <div class="controls">
+                  <input type="text" name="contact" class="input-large" id="inputContact" placeholder="Leiter" required>
+                </div>
+              </div>
+                  
+              <div class="control-group">
                 <label class="control-label" for="inputStreet">Straße</label>
                 <div class="controls">
                   <input type="text" name="street" class="input-large" id="inputStreet" placeholder="Straße">
@@ -132,6 +144,23 @@
                   <input type="email" name="email" class="input-medium" id="inputEmail" placeholder="Email">
                 </div>
               </div>
+                  
+              <div class="control-group">
+                <label class="control-label" for="contributor_id">Bearbeitet von</label>
+                <div class="controls">
+                    <input type="hidden" name="contributor_id" id="contributor_id" value="" />
+                    <div class="btn-group contributor_id" data-toggle="buttons-radio">
+                        <?php
+                        foreach ($contributor as $value) {
+                            if($value['id'] == $_SESSION['contributor_id']) $tarifClass = "btn active";
+                            else $tarifClass = "btn";
+                            echo '<button type="button" value="'.$value['id'].'" class="'.$tarifClass.'">'.$value['name'].'</button>';
+                        }
+                        ?>
+                    </div>
+                </div>
+              </div>                  
+                  
               <button type="submit" class="btn">Speichern</button>
         </div>
             </form>

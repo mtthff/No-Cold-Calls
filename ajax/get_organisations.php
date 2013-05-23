@@ -19,9 +19,8 @@ try{
     $DBH = new PDO("sqlite:$db_name");
     $DBH->setAttribute (PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);// ::TODO:: change it befor productive
 
-    $STH = $DBH->query('SELECT cu.id, cu.organisation, ap.contact
-                            FROM customer as cu
-                            LEFT JOIN appointment as ap ON (cu.id = ap.customer_id)
+    $STH = $DBH->query('SELECT id, organisation, contact
+                            FROM customer 
                             WHERE organisation LIKE "%'.$_GET['term'].'%"        
                             ORDER BY organisation ASC');
         

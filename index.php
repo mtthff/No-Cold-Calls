@@ -11,9 +11,8 @@ try{
                             strftime("%d.%m.%Y", a.datetime) AS day,
                             strftime("%H:%M", a.datetime) AS time,
                             cu.organisation,
-                            a.contact,
-                            a.phone AS appoint_phone,
-                            cu.phone AS custom_phone,
+                            cu.contact,
+                            cu.phone,
                             a.number,
                             a.comment,
                             a.type_id,
@@ -135,12 +134,10 @@ catch(PDOException $e) //Besonderheiten anzeigen
 
     foreach ($app as $value) {
         
-        if (!$phone = $value['appoint_phone']) $phone = $value['custom_phone'];
         
-        if ($value['juhe']) $juhe = '<i class="icon-ok">'; 
         if ($value['juhe']) $juhe = '<i class="icon-check">'; 
-//        if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-ok">'; 
         if ($value['fotocd'] == 1) $fotoCD = '<i class="icon-check">'; 
+
         if ($value['status_id'] == 1) $statusClass = "info";
         elseif ($value['status_id'] == 2) $statusClass = "";
         else $statusClass = "error";
@@ -154,7 +151,7 @@ catch(PDOException $e) //Besonderheiten anzeigen
         echo '<td>'.$value['time'].'</td>';
         echo '<td>'.$value['organisation'].'</td>';
         echo '<td>'.substr($value['contact'], 0, 10).'...</td>';
-        echo '<td>'.$phone.'</td>';
+        echo '<td>'.$value['phone'].'</td>';
         echo '<td>'.$value['age'].'</td>';
         echo '<td>'.$value['number'].'</td>';
         echo '<td>'.substr($value['labeltarif'], 0,4).substr($value['labeltarif'], -3).'</td>';
