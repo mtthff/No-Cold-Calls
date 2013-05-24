@@ -45,6 +45,30 @@ try{
     ");
     echo "Table <i>appointment</i> created. <br />";
     
+    //Table APPOINTMENT_BACKUP
+    $DBH->exec("
+        CREATE TABLE IF NOT EXISTS appointment_backup (
+            id INTEGER PRIMARY KEY,
+            appointment_id INTEGER,
+            status_id INTEGER,
+            customer_id INTEGER,
+            datetime NUMERIC,
+            number INTEGER,
+            comment TEXT,
+            type_id INTEGER,
+            age TEXT,
+            tarif_id INTEGER,
+            juhe NUMERIC,
+            version_id INTEGER,
+            fotocd NUMERIC,            
+            contributor_id INTEGER,
+            listed_date NUMERIC,
+            updater_id INTEGER,
+            update_date NUMERIC
+            );        
+    ");
+    echo "Table <i>appointment_backup</i> created. <br />";
+    
    //Table APPOINTMENT_TYPE
     $DBH->exec("
         CREATE TABLE IF NOT EXISTS appointment_type (
